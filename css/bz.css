@@ -1,0 +1,55 @@
+
+/*s报障预警*/
+.bz-page .fristLetter{
+	color:#68ffe0;
+}
+.bz-page .fristLetter .underline{
+	background: #68ffe0 ;
+}
+.bz-page .pageAniGroup{
+	left:0;top:-40px;
+	position:absolute;
+	/*background: url(./images/bz/报障图形.png);*/
+	width: 720px;
+	height: 588px;
+}
+.bz-dunpai,.bz-flash,.bz-ditu,.bz-neiquan{
+	position: absolute;
+	display: block;
+	left:0px;
+	top:0px;
+}
+.bz-dunpai,.bz-flash,.bz-neiquan{
+	width: 400px;
+	height: 400px;
+	left:40px;
+	top:98px;
+}
+.bz-ditu{
+	width: 720px;
+	height: 588px;
+}
+
+/*动画之前*/
+.bz-dunpai,.bz-flash,.bz-ditu,.bz-neiquan{
+	opacity: 0;
+	*filter: alpha(opacity=0);
+}
+.bz-flash,.bz-dunpai{
+	transform: scale(0,0);
+}
+
+/*动画之后*/
+.bz-ditu.animate-show,
+.bz-neiquan.animate-show,
+.bz-flash.animate-show,
+.bz-dunpai.animate-show
+{
+	opacity: 1;
+	*filter: alpha(opacity=100);
+}
+.bz-flash.animate-show,
+.bz-dunpai.animate-show{
+	transform: scale(1,1);
+}
+/*s报障预警*/

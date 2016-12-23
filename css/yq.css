@@ -1,0 +1,44 @@
+/*s舆情分析*/
+.yq-page .fristLetter{
+	color:#65bffe ;
+}
+.yq-page .fristLetter .underline{
+	background: #65bffe  ;
+}
+.yq-page .pageAniGroup{
+	position:absolute;
+	left:0px;
+	top:0px;
+	/*background: url(./images/yq/舆情图形.png);*/
+	/*width: 801px;*/
+	/*height: 570px;*/
+}
+.yq-quan1,.yq-quan2,.yq-diqiu,.yq-dian{
+	position: absolute;
+	display: block;
+	width: 610px;
+	height: 610px;
+	left:0px;
+	top:-70px;
+}
+/*.yq-dian{border:1px solid red;}*/
+/*动画之前*/
+.yq-quan1,.yq-quan2,.yq-diqiu{
+	opacity: 0;
+	*filter: alpha(opacity=0);
+}
+.yq-diqiu{
+	transform: scale(0,0);
+}
+
+/*动画之后*/
+.yq-quan1.animate-show,
+.yq-quan2.animate-show,
+.yq-diqiu.animate-show{
+	opacity: 1;
+	*filter: alpha(opacity=100);
+}
+.yq-diqiu.animate-show{
+	transform: scale(1,1);
+}
+/*e舆情分析*/

@@ -1,0 +1,78 @@
+
+/*s问题识别*/
+.wt-page .fristLetter{
+	color:#00d4f9 ;
+}
+.wt-page .fristLetter .underline{
+	background: #00d4f9  ;
+}
+.wt-page .pageAniGroup{
+	left:-10px;
+	top:-10px;
+	position:absolute;
+	/*background: url(./images/pt/平台图形.png);*/
+}
+.wt-ditu,.wt-dian,.wt-liubian,.wt-liubian-light,.wt-liubian-hui,.wt-renwu,.wt-renwu1,.wt-renwu2,.wt-renwu3,.wt-renwu4,.wt-renwu5,.wt-renwu6,.wt-renwu7,.wt-renwu8{
+	position: absolute;
+	display: block;
+	/*opacity: 0;*/
+	/**filter: alpha(opacity=0);*/
+	/*-webkit-transition-delay: .1s;*/
+	/*-o-transition-delay: .1s;*/
+	/*transition-delay: .1s;*/
+	/*-moz-transition: all .2s ease-in-out;*/
+	/*-o-transition: all .2s ease-in-out;*/
+	/*-webkit-transition: all .2s ease-in-out;*/
+	/*transition: all .2s ease-in-out;*/
+	left:0px;
+	top:0px;
+}
+.wt-renwu1,.wt-renwu2,.wt-renwu3,.wt-renwu4,.wt-renwu5,.wt-renwu6,.wt-renwu7,.wt-renwu8{
+	width: 45px;
+	height: 85px;
+}
+.wt-ditu,.wt-dian,.wt-liubian,.wt-liubian-light,.wt-liubian-hui,.wt-renwu{
+	width: 727px;
+	height: 413px;
+}
+.wt-renwu1{left:50px;top:84px;}
+.wt-renwu2{left:296px;top:34px;}
+.wt-renwu3{left:218px;top:172px;}
+.wt-renwu4{left:614px;top:34px;}
+.wt-renwu5{left:454px;top:134px;}
+.wt-renwu6{left:294px;top:306px;}
+.wt-renwu7{left:443px;top:309px;}
+.wt-renwu8{left:604px;top:214px;}
+.wt-dian{
+	opacity: 1;
+	*filter: alpha(opacity=100);
+}
+/*动画之前*/
+.wt-ditu,.wt-liubian,.wt-liubian-hui,.wt-liubian-light,.wt-renwu,.wt-renwu1,.wt-renwu2,.wt-renwu3,.wt-renwu4,.wt-renwu5,.wt-renwu6,.wt-renwu7,.wt-renwu8{
+	opacity: 0;
+	*filter: alpha(opacity=0);
+}
+.wt-liubian-light{
+	clip:rect(0px 50px 413px 0px);
+}
+/*动画之后*/
+.wt-renwu1.animate-show,
+.wt-renwu2.animate-show,
+.wt-renwu3.animate-show,
+.wt-renwu4.animate-show,
+.wt-renwu5.animate-show,
+.wt-renwu6.animate-show,
+.wt-renwu7.animate-show,
+.wt-renwu8.animate-show,
+.wt-ditu.animate-show,
+.wt-liubian.animate-show,
+.wt-liubian-hui.animate-show,
+.wt-liubian-light.animate-show
+{
+	opacity: 1;
+	*filter: alpha(opacity=100);
+}
+.wt-liubian-light.animate-show{
+	clip:rect(0px 727px 413px 727px);
+}
+/*e问题识别*/

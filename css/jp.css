@@ -1,0 +1,64 @@
+
+/*s竞品分析*/
+.jp-page .pageAniGroup{
+	left:0;top:-40px;
+	position:absolute;
+	/*background: url(./images/bz/报障图形.png);*/
+	width: 720px;
+	height: 588px;
+}
+.jp-page .fristLetter{
+	color:#9b96fd;
+}
+.jp-page .fristLetter .underline{
+	background: #9b96fd ;
+}
+.jp-item1,.jp-item2,.jp-info,.jp-kuang,.jp-zhu1,.jp-zhu2,.jp-people,.jp-pk{
+	position: absolute;
+	display: block;
+	left:0px;
+	top:0px;
+}
+.jp-pk{
+	width:59px;
+	height:26px;
+	left: 314px; top: 58px;
+}
+.jp-item1,.jp-item2,.jp-info,.jp-kuang,.jp-people{
+	width: 307px;
+	height: 387px;
+}
+.jp-item2{
+	left: 378px; top: 0px;
+}
+
+/*动画之前*/
+.jp-info,.jp-kuang,.jp-zhu1,.jp-zhu2,.jp-people,.jp-pk{
+	opacity: 0;
+	*filter: alpha(opacity=0);
+}
+.jp-zhu1,.jp-zhu2{
+	width: 0px;
+	height: 387px;
+}
+.jp-pk{
+	transform: scale(0,0);
+}
+
+/*动画之后*/
+.jp-info.animate-show,
+.jp-kuang.animate-show,
+.jp-zhu1.animate-show,
+.jp-people.animate-show,
+.jp-pk.animate-show,
+.jp-zhu2.animate-show
+{
+	opacity: 1;
+	*filter: alpha(opacity=100);
+}
+.jp-pk.animate-show{
+	transform: scale(1,1);
+}
+.jp-zhu1.animate-show,.jp-zhu2.animate-show{
+	width: 307px;
+}

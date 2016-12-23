@@ -1,0 +1,160 @@
+/*s平台概况*/
+.pt-page .fristLetter{
+	color:#fdcd00 ;
+}
+.pt-page .fristLetter .underline{
+	background: #fdcd00 ;
+}
+.pt-page .pageAniGroup{
+	position:absolute;
+	/*background: url(./images/pt/平台图形.png);*/
+	width: 720px;
+	top: -102px;
+	height: 588px;
+}
+.pt-quan1,.pt-quan2,.pt-quan3,.pt-quan4,.pt-ditu,.pt-line1,.pt-line2,.pt-line3,.pt-line4,.pt-dian1,.pt-dian2,.pt-dian3,.pt-dian4,.pt-dian5,.pt-text{
+	position: absolute;
+	display: block;
+	left:0px;
+	top:0px;
+}
+.pt-quan1,.pt-quan2,.pt-quan3,.pt-quan4{
+	width: 520px;
+	height:520px;
+	left: 115px;
+	top: 33px;
+}
+.pt-dian1,.pt-dian2,.pt-dian3,.pt-dian4,.pt-dian5{
+background-size:100% ;
+}
+.pt-text{
+	width: 140px;
+	font-size:18px;
+}
+
+.pt-dian1 .pt-text{
+	left:18px;top:-26px;
+}
+.pt-dian2 .pt-text{
+	left:-38px;top:-22px;
+}
+.pt-dian3 .pt-text{
+	left:-34px;top:-14px;
+}
+.pt-dian4 .pt-text{
+	left:20px;top:0px;
+}
+.pt-dian5 .pt-text{
+	left:26px;top:-6px;
+}
+
+.pt-dian1{
+	top: 215px;
+	left: 497px;
+	width:40px;
+	height:40px;
+}
+.pt-dian2{
+	top: 188px;
+	left: 276px;
+	width:20px;
+	height:20px;
+}
+.pt-dian3{
+	top: 275px;
+	left: 177px;
+	width:30px;
+	height:30px;
+}
+.pt-dian4{
+	top: 276px;
+	left: 359px;
+	width:16px;
+	height:16px;
+}
+.pt-dian5{
+	top: 394px;
+	left: 387px;
+	width:24px;
+	height:24px;
+}
+.pt-line1,.pt-line2,.pt-line3,.pt-line4{
+	width: 0px;
+	height:0px;
+}
+.pt-line1{
+	width: 230px;
+	height:57px;
+	top: 180px;
+	left: 288px;
+}
+.pt-line2{
+	width: 321px;
+	height:72px;
+	top: 219px;
+	left: 194px;
+}
+.pt-line3{
+	width: 152px;
+	height:49px;
+	top: 236px;
+	left: 367px;
+}
+.pt-line4{
+	width: 116px;
+	height:165px;
+	top: 237px;
+	left: 400px;
+}
+.pt-ditu{
+	width: 702px;
+	height: 392px;
+	top: 135px;
+	left: 19px;
+}
+/*动画之前*/
+.pt-quan1,.pt-quan2,.pt-quan3,.pt-quan4,.pt-ditu,.pt-dian1,.pt-dian2,.pt-dian3,.pt-dian4,.pt-dian5{
+	opacity: 0;
+	*filter: alpha(opacity=0);
+}
+.pt-dian1,.pt-dian2,.pt-dian3,.pt-dian4,.pt-dian5{
+	transform: scale(0,0);
+}
+.pt-line1,.pt-line2,.pt-line3,.pt-line4{
+	clip:rect(0px 321px 392px 321px);
+}
+/*动画之后*/
+.pt-quan1.animate-show,
+.pt-quan2.animate-show,
+.pt-quan3.animate-show,
+.pt-quan4.animate-show,
+.pt-ditu.animate-show,
+.pt-dian1.animate-show,
+.pt-dian2.animate-show,
+.pt-dian3.animate-show,
+.pt-dian4.animate-show,
+.pt-dian5.animate-show
+{
+	opacity: 1;
+	*filter: alpha(opacity=100);
+}
+.pt-dian1.animate-show,
+.pt-dian2.animate-show,
+.pt-dian3.animate-show,
+.pt-dian4.animate-show,
+.pt-dian5.animate-show{
+	transform: scale(1,1);
+}
+.pt-line1.animate-show{
+	clip:rect(0px 321px 392px 0px);
+}
+.pt-line2.animate-show{
+	clip:rect(0px 321px 392px 0px);
+}
+.pt-line3.animate-show{
+	clip:rect(0px 321px 392px 0px);
+}
+.pt-line4.animate-show{
+	clip:rect(0px 321px 392px 0px);
+}
+/*e平台概况*/
