@@ -13,11 +13,49 @@
 .jp-page .fristLetter .underline{
 	background: #9b96fd ;
 }
-.jp-item1,.jp-item2,.jp-info,.jp-kuang,.jp-zhu1,.jp-zhu2,.jp-people,.jp-pk{
+.jp-item1,.jp-item2,.jp-info,.jp-kuang,.jp-zhu1,.jp-zhu2,.jp-people,.jp-pk,.jp-light1,.jp-light2,.jp-light3{
 	position: absolute;
 	display: block;
 	left:0px;
 	top:0px;
+}
+.jp-light1{
+	 width: 259px;
+	 height: 31px;
+	 left: 24px;
+	 top: -16px;
+	 overflow: hidden;
+
+
+ }
+.jp-light3>img{
+	transform:translateX(180px) scale(0,1);
+	opacity: 0;
+}
+.jp-light1>img{
+	transform: translateX(-100px) scale(0,1);
+	opacity: 0;
+}
+.jp-light2>img{
+	transform: translateY(-100px) scale(1,0);
+	opacity: 0;
+}
+
+.jp-light3{
+	width: 259px;
+	height: 31px;
+	left: 24px;
+	top: 370px;
+	overflow: hidden;
+
+}
+.jp-light2{
+	left: 290px;
+	top: 20px;
+	width: 31px;
+	height: 341px;
+	overflow: hidden;
+
 }
 .jp-pk{
 	width:59px;

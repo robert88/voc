@@ -450,12 +450,16 @@ $(function () {
         $(".jp-page").on("ready", function () {
             var $this = $(this);
             addCSS3Animate($(".jp-item1 .jp-kuang")).then(function () {
-                $(".jp-item1 .jp-light1,.jp-item1 .jp-light2,.jp-item1 .jp-light3").addClass("a")
+                $(".jp-item1 .jp-light1>img").addClass("animate-move")
+                $(".jp-item1 .jp-light3>img").addClass("animate-move-v-2")
+                $(".jp-item1 .jp-light2>img").addClass("animate-move-h")
                 addCSS3Animate($(".jp-item1 .jp-info")).done(function () {
                     addCSS3Animate($(".jp-item1 .jp-people")).done(function () {
                         addCSS3Animate($(".jp-item1 .jp-zhu1")).done(function () {
                             addCSS3Animate($(".jp-item2 .jp-kuang")).then(function () {
-                                $(".jp-item2 .jp-light1,.jp-item2 .jp-light2,.jp-item2 .jp-light3").addClass("a")
+                                $(".jp-item2 .jp-light1>img").addClass("animate-move")
+                                $(".jp-item2 .jp-light3>img").addClass("animate-move-v-2")
+                                $(".jp-item2 .jp-light2>img").addClass("animate-move-h")
                                 addCSS3Animate($(".jp-item2 .jp-info")).done(function () {
                                     addCSS3Animate($(".jp-item2 .jp-people")).done(function () {
                                         addCSS3Animate($(".jp-item2 .jp-zhu2")).done(function () {
