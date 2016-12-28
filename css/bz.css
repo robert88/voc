@@ -31,7 +31,11 @@
 }
 
 /*动画之前*/
-.bz-dunpai,.bz-flash,.bz-ditu,.bz-neiquan{
+.bz-ditu{
+	opacity: 0.5;
+	*filter: alpha(opacity=50);
+}
+.bz-dunpai,.bz-flash,.bz-neiquan{
 	opacity: 0;
 	*filter: alpha(opacity=0);
 }

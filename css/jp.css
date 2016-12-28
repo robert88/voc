@@ -71,6 +71,10 @@
 }
 
 /*动画之前*/
+.jp-item1 .jp-kuang{
+	opacity: 0.5;
+	*filter: alpha(opacity=50);
+}
 .jp-info,.jp-kuang,.jp-zhu1,.jp-zhu2,.jp-people,.jp-pk{
 	opacity: 0;
 	*filter: alpha(opacity=0);

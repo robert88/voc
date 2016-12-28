@@ -36,6 +36,10 @@
         $targe.css({top: top + "px"});
     }
 
+    function resizePageAniGroupByScale($targe, h) {
+        var lineHeight = getResize(maxHeight, minHeight, h, 120, 80);
+    }
+
     /*自适应*/
     function resizeLayout() {
         var h = getRagen($(window).height(), maxHeight, minHeight);
@@ -43,6 +47,7 @@
         resizeLeft($curpage.find(".pageleft"), h);
         resizeHeader($("header"), h);
         resizePageAniGroup($curpage.find(".pageAniGroup"), h)
+        resizePageAniGroupByScale($curpage.find(".pageAniGroup"), h)
     }
 
     $(window).resize(function () {
@@ -90,7 +95,7 @@ $(function () {
         var count = 0;
         g_cont++
         var def = {
-            duration: "1s",
+            duration: ".5s",
             property: "all",
             timingFunction: "ease-in-out",
             delay: ".1s",
@@ -102,11 +107,13 @@ $(function () {
         }
         var opt = $.extend({}, def, aniOpt);
         var initCont=g_cont;
-        console.log("init",len)
         $target.each(function () {
              $(this).off(css3AnimateEndEvent).on(css3AnimateEndEvent, function () {
+                 if($(this).parents(".page").data("status")=="stop"){
+                     $(this).off(css3AnimateEndEvent);
+                     return;
+                 }
                  $(this).off(css3AnimateEndEvent);
-                 console.log("")
                  count++;
                  if(count==len){
                      dtd.resolve(); // 改变deferred对象的执行状态
@@ -128,8 +135,31 @@ $(function () {
         }
         return dtd.promise();
     }
-
-
+    var animateId=0;
+    function animateCountUp($target){
+        var options = {
+               useEasing: true, // toggle easing
+               useGrouping: true, // 1,000,000 vs 1000000
+               separator: ',', // character to use as a separator*
+               decimal: '.' // character to use as a decimal
+           };
+        var vals = [];
+        $target.each(function () {
+            if(!$(this).attr("id")){
+                $(this).attr("id","countupid"+animateId);
+                animateId++
+            }
+            vals.push({
+            id:$(this).attr("id"),
+                count:$(this).data("num")*1
+            })
+        })
+        var len = vals.length;
+        while(len--){
+            var ret = vals[len];
+            new countUp(ret.id, 0, (ret.count || 0), 0, 2, options).start();
+        }
+    }
 
     /*随机显示点*/
     function getRomand(dianInfo) {
@@ -198,13 +228,13 @@ $(function () {
             initCanvasDian(romand[i],dianInfo,opts)
         }
         /*计算器清不掉，resolve就会触发*/
-        if(opts.lock){
+        if(opts.canvasTimer.data("lock")){
             opts.c.width = opts.c.width;
             console.log("clear")
             return;
         }
-        clearTimeout(opts.canvasTimer)
-        opts.canvasTimer = setTimeout(initCanvasAnimate,80,romand,dianInfo,opts);
+        clearTimeout(opts.canvasTimer.data("timer"))
+        opts.canvasTimer.data("timer",setTimeout(initCanvasAnimate,80,romand,dianInfo,opts));
     }
 
     //已经显示的点才可以连线
@@ -301,13 +331,13 @@ $(function () {
             initCanvasDian2(romand[i],dianInfo,opts)
         }
         /*计算器清不掉，resolve就会触发*/
-        if(opts.lock){
+        if(opts.canvasTimer.data("lock")){
             opts.c.width = opts.c.width;
             console.log("clear")
             return;
         }
-        clearTimeout(opts.canvasTimer)
-        opts.canvasTimer = setTimeout(initCanvasAnimate2,80,romand,dianInfo,opts);
+        clearTimeout(opts.canvasTimer.data("timer"))
+        opts.canvasTimer.data("timer",setTimeout(initCanvasAnimate2,80,romand,dianInfo,opts)) ;
     }
 
     function initCanvasDian2(dian,dianInfo,opts){
@@ -336,27 +366,15 @@ $(function () {
         /*平台*/
         $(".pt-page").on("ready", function () {
             var $this = $(this);
-            addCSS3Animate($(".pt-quan1,.pt-quan2,.pt-quan3,.pt-quan4")).done(function () {
-                $(".pt-quan1,.pt-quan3").addClass("animate-infinite");
-                $(".pt-quan2,.pt-quan4").addClass("animate-infinite-rev");
-                addCSS3Animate($(".pt-ditu")).done(function () {
+            addCSS3Animate($(".pt-ditu")).done(function () {
+                addCSS3Animate($(".pt-quan1,.pt-quan2,.pt-quan3,.pt-quan4")).done(function () {
+                    $(".pt-quan1,.pt-quan3").addClass("animate-infinite");
+                    $(".pt-quan2,.pt-quan4").addClass("animate-infinite-rev");
                     addCSS3Animate($(".pt-dian1")).done(function () {
-                        addCSS3Animate($(".pt-line1")).done(function () {
-                            addCSS3Animate($(".pt-dian2")).done(function () {
-                                addCSS3Animate($(".pt-line2")).done(function () {
-                                    addCSS3Animate($(".pt-dian3")).done(function () {
-                                        addCSS3Animate($(".pt-line3")).done(function () {
-                                            addCSS3Animate($(".pt-dian4")).done(function () {
-                                                addCSS3Animate($(".pt-line4")).done(function () {
-                                                    addCSS3Animate($(".pt-dian5")).done(function () {
-                                                        /*切换到下一页*/
-                                                        goNextPage($this, $this.next(),7000);
-                                                    })
-                                                })
-                                            })
-                                        })
-                                    })
-                                })
+                        addCSS3Animate($(".pt-line1,.pt-line2,.pt-line3,.pt-line4")).done(function () {
+                            addCSS3Animate($(".pt-dian2,.pt-dian3,.pt-dian4,.pt-dian5")).done(function () {
+                                /*切换到下一页*/
+                                waitGoNextPage($this, $this.next(),7000);
                             })
                         })
                     })
@@ -374,7 +392,7 @@ $(function () {
                 dtd: $.Deferred(),// 新建一个deferred对象
                 c: $(".yq-dian")[0],//画布
                 ctx: $(".yq-dian")[0].getContext("2d"),//画布
-                canvasTimer: null
+                canvasTimer: $this.data("lock",false)
             }
             addCSS3Animate($(".yq-quan1")).done(function () {
                 addCSS3Animate($(".yq-quan2")).done(function () {
@@ -383,9 +401,7 @@ $(function () {
                     addCSS3Animate($(".yq-diqiu")).done(function () {
                         canvasAnimate(opts,dianInfo).done(function () {
                             /*切换到下一页*/
-                            goNextPage($this, $this.next(),7000,function(){
-                                opts.lock=true;
-                            });
+                            waitGoNextPage($this, $this.next(),7000);
                         })
                     })
                 })
@@ -395,29 +411,29 @@ $(function () {
 
         /*问题*/
         $(".wt-page").on("ready", function () {
+            var $this = $(this);
             var dianInfo = [{"x":176.33331298828125,"y":120,"index":0},{"x":255.33331298828125,"y":75,"index":1},{"x":281.33331298828125,"y":120,"index":2},{"x":334.33331298828125,"y":121,"index":3},{"x":360.33331298828125,"y":75,"index":4},{"x":412.33331298828125,"y":75,"index":5},{"x":437.33331298828125,"y":120,"index":6},{"x":492.33331298828125,"y":120,"index":7},{"x":515.3333129882812,"y":75,"index":8},{"x":567.3333129882812,"y":74,"index":9},{"x":595.3333129882812,"y":119,"index":10},{"x":673.3333129882812,"y":162,"index":11},{"x":568.3333129882812,"y":165,"index":12},{"x":570.3333129882812,"y":256,"index":13},{"x":515.3333129882812,"y":165,"index":14},{"x":489.33331298828125,"y":211,"index":15},{"x":517.3333129882812,"y":255,"index":16},{"x":412.33331298828125,"y":166,"index":17},{"x":437.33331298828125,"y":211,"index":18},{"x":410.33331298828125,"y":256,"index":19},{"x":437.33331298828125,"y":302,"index":20},{"x":357.33331298828125,"y":257,"index":21},{"x":331.33331298828125,"y":210,"index":22},{"x":358.33331298828125,"y":165,"index":23},{"x":279.33331298828125,"y":210,"index":24},{"x":201.33331298828125,"y":255,"index":25},{"x":174.33331298828125,"y":210,"index":26},{"x":98.33331298828125,"y":165,"index":27},{"x":122.33331298828125,"y":120,"index":28},{"x":201.33331298828125,"y":165,"index":29},{"x":254.33331298828125,"y":165,"index":30},{"x":333.33331298828125,"y":300,"index":31},{"x":254.33331298828125,"y":254,"index":32}]
             var opts = {
                 count: 0,//随机计数
                 dtd: $.Deferred(),// 新建一个deferred对象
                 c: $(".wt-dian")[0],//画布
                 ctx: $(".wt-dian")[0].getContext("2d"),//画布
-                canvasTimer: null
+                canvasTimer: $this.data("lock",false)
             }
-            var $this = $(this);
+
+            $this.data("status")=="animating"
             addCSS3Animate($(".wt-ditu")).done(function () {
-                addCSS3Animate($(".wt-liubian,.wt-liubian-light")).done(function () {
+                addCSS3Animate($(".wt-liubian,.wt-liubian-light"),{duration:"1s"}).done(function () {
                     canvasAnimate2(opts,dianInfo).done(function () {
-                        addCSS3Animate($(".wt-renwu2")).done(function () {
+                        addCSS3Animate($(".wt-renwu2"),{duration:".2s"}).done(function () {
                             addCSS3Animate($(".wt-renwu3")).done(function () {
-                                addCSS3Animate($(".wt-renwu8")).done(function () {
+                                addCSS3Animate($(".wt-renwu8"),{duration:".3s"}).done(function () {
                                     addCSS3Animate($(".wt-renwu1")).done(function () {
                                         addCSS3Animate($(".wt-renwu6")).then(function () {
                                             addCSS3Animate($(".wt-renwu7")).done(function () {
-                                                addCSS3Animate($(".wt-renwu5")).then(function () {
+                                                addCSS3Animate($(".wt-renwu5"),{duration:".2s"}).then(function () {
                                                     addCSS3Animate($(".wt-renwu4")).done(function () {
-                                                        goNextPage($this, $this.next(), 7000,function(){
-                                                            opts.lock=true;
-                                                        });
+                                                        waitGoNextPage($this, $this.next(), 7000);
                                                     })
                                                 })
                                             })
@@ -434,12 +450,13 @@ $(function () {
         /*报障*/
         $(".bz-page").on("ready", function () {
             var $this = $(this);
+            $this.data("status")=="animating"
             addCSS3Animate($(".bz-ditu")).done(function () {
                 addCSS3Animate($(".bz-neiquan")).done(function () {
                     $(".bz-neiquan").addClass("animate-infinite-rev");
                     addCSS3Animate($(".bz-dunpai")).done(function () {
                         addCSS3Animate($(".bz-flash"),{timingFunction:"cubic-bezier(.47,-0.05,.69,1.69)"}).done(function () {
-                            goNextPage($this, $this.next(),7000);
+                            waitGoNextPage($this, $this.next(),7000);
                         })
                     })
                 })
@@ -449,6 +466,7 @@ $(function () {
         /*竞品*/
         $(".jp-page").on("ready", function () {
             var $this = $(this);
+            $this.data("status")=="animating"
             addCSS3Animate($(".jp-item1 .jp-kuang")).then(function () {
                 $(".jp-item1 .jp-light1>img").addClass("animate-move")
                 $(".jp-item1 .jp-light3>img").addClass("animate-move-v-2")
@@ -463,7 +481,7 @@ $(function () {
                                 addCSS3Animate($(".jp-item2 .jp-info")).done(function () {
                                     addCSS3Animate($(".jp-item2 .jp-people")).done(function () {
                                         addCSS3Animate($(".jp-item2 .jp-zhu2")).done(function () {
-                                            goNextPage($this, $this.next(),7000);
+                                            waitGoNextPage($this, $this.next(),7000);
                                         })
                                     })
                                 })
@@ -473,50 +491,67 @@ $(function () {
                 })
             })
         })
+    }
 
+    function clearPage($curpage){
+        $curpage.data("lock",true);
+        clearTimeout($curpage.data("timer2"));
+       clearTimeout($curpage.data("timer")) ;
+      var canvas =   $curpage.find("canvas");
+      if(canvas.length){
+          canvas[0].width = canvas[0].width;
+      }
+        $curpage.find(".animate-show").off(css3AnimateEndEvent).removeClass("animate-show");
+        $(".animate-infinite").removeClass("animate-infinite")
+        $(".animate-infinite-rev").removeClass("animate-infinite-rev")
+        $(".animate-move").removeClass("animate-move")
+        $(".animate-move-v-2").removeClass("animate-move-v-2")
+        $(".animate-move-h").removeClass("animate-move-h")
+    }
+    function goNextPage($curpage, $nextpage,time,callback){
+        var $children = $curpage.parent().children();
+
+        //最后一页，或者只有一页的情况处理
+        if (!$nextpage || $nextpage.length == 0) {
+            if ($children.length == 1) {
+                return;
+            }
+            $nextpage = $children.eq(0);
+        }
+
+        clearPage($curpage);
+
+        if($nextpage.data("ready")){
+            goNext();
+        }else{
+            loadoneimg($nextpage,$nextpage.data("bg"),goNext)
+        }
+        function  goNext() {
+            $curpage.removeClass("current")
+            $nextpage.addClass("current");
+            $(window).trigger("resize");
+            initpage();
+        }
     }
     /*切换到下一页*/
-    function goNextPage($curpage, $nextpage,time,callback) {
-        setTimeout(function () {
-            var $children = $curpage.parent().children();
-            //最后一页，或者只有一页的情况处理
-            if (!$nextpage || $nextpage.length == 0) {
-                if ($children.length == 1) {
-                    return;
-                }
-                $nextpage = $children.eq(0);
-            }
-            if($nextpage.data("ready")){
-                goNext();
+    function waitGoNextPage($curpage, $nextpage,time,callback) {
+        clearTimeout($curpage.data("timer2"));
+        $curpage.data("timer2", setTimeout(function () {
+            if( vSwiper.activeIndex==4){
+                vSwiper._slideTo(0)
             }else{
-                loadoneimg($nextpage,$nextpage.data("bg"),goNext)
+                vSwiper._slideNext();
             }
-            function  goNext() {
-                addCSS3Animate($nextpage,function () {
-                    $curpage.removeClass("current")
-                    $nextpage.addClass("current");
-                    $(window).trigger("resize");
-                }).done(function () {
-                    addCSS3Animate($curpage.find(".animate-show"),function ($target) {
-                        $target.removeClass("animate-show")
-                    }).done(function () {
-                        if(typeof  callback=="function"){
-                            callback();
-                        }
-                        initpage()
-                        $curpage.find(".animate-infinite").removeClass("animate-infinite")
-                        $curpage.find(".animate-infinite-rev").removeClass("animate-infinite-rev")
-                    })
-                })
-            }
-        }, time)
+        }, time))
     }
 
     /*初始化页面*/
-    function initpage() {
+    function initpage(initBg) {
         var $curpage = $(".page.current") || $(".page").eq(0);
+
+        animateCountUp($curpage.find(".animateCountUp"))
         if (!$curpage.data("ready")) {
-            loadpage($curpage);
+            loadpage($curpage,initBg);
         } else {
             $curpage.trigger("ready");
         }
@@ -540,28 +575,32 @@ $(function () {
     }
 
     /*下载多个图片回调*/
-    function loadimg($page, $target, src, deepObj, len) {
+    function loadimg($page, $target, src, deepObj, len,initBg) {
         var img = new Image;
         img.onload = function () {
             $target.css("background-image", "url(" + src + ")")
-            checkloadComplete($page, deepObj, len);
+            checkloadComplete($page, deepObj, len,initBg);
         }
         img.onerror = function () {
-            checkloadComplete($page, deepObj, len);
+            checkloadComplete($page, deepObj, len,initBg);
         }
         img.src = src;
     }
 
     /*校验触发ready事件*/
-    function checkloadComplete($page, deepObj, len) {
+    function checkloadComplete($page, deepObj, len,initBg) {
         deepObj.count++;
         if (deepObj.count == len) {
+            if(typeof initBg=="function"){
+                initBg();
+            }
+
             $page.trigger("ready").data("ready", true);
         }
     }
 
     /*加载图*/
-    function loadpage($curpage) {
+    function loadpage($curpage,initBg) {
         var imgArr = [];
         $curpage.find("[data-img]").each(function () {
             imgArr.push({
@@ -576,11 +615,30 @@ $(function () {
         var len = imgArr.length;
         var deepObj = {count: 0}
         for (var i = 0; i < len; i++) {
-            loadimg($curpage, imgArr[i].$target, imgArr[i].src, deepObj, len);
+            loadimg($curpage, imgArr[i].$target, imgArr[i].src, deepObj, len,initBg);
         }
     }
+    var vSwiper = new Swiper('.swiper-container',{
+        speed: 1000,
+        parallax:true,
+        // nextButton: '.arrow-right',
+        // prevButton: '.arrow-left',
+        paginationClickable: true,
+        pagination:".swiper-pagination",
+        onSlideChangeStart:function () {
+            goNextPage($(".page").eq(vSwiper.previousIndex),$(".page").eq(vSwiper.activeIndex));
+        }
+    })
 
-
-    initpage();
+    function initAllbg() {
+        console.log("page1")
+        $(".page").each(function (idx) {
+            var src= $(this).data("bg")
+            if(idx>0){
+                $(this).css("background-image", "url(" + src + ")")
+            }
+        })
+    }
+    initpage(initAllbg);
     initPageEvent()
 })

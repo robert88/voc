@@ -9,6 +9,8 @@
 	position:absolute;
 	left:0px;
 	top:0px;
+	width: 720px;
+	height: 588px;
 	/*background: url(./images/yq/舆情图形.png);*/
 	/*width: 801px;*/
 	/*height: 570px;*/
@@ -23,7 +25,11 @@
 }
 /*.yq-dian{border:1px solid red;}*/
 /*动画之前*/
-.yq-quan1,.yq-quan2,.yq-diqiu{
+.yq-quan1{
+	opacity:0.5;
+	*filter: alpha(opacity=50);
+}
+.yq-quan2,.yq-diqiu{
 	opacity: 0;
 	*filter: alpha(opacity=0);
 }

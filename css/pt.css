@@ -8,8 +8,8 @@
 .pt-page .pageAniGroup{
 	position:absolute;
 	/*background: url(./images/pt/平台图形.png);*/
-	width: 720px;
 	top: -102px;
+	width: 720px;
 	height: 588px;
 }
 .pt-quan1,.pt-quan2,.pt-quan3,.pt-quan4,.pt-ditu,.pt-line1,.pt-line2,.pt-line3,.pt-line4,.pt-dian1,.pt-dian2,.pt-dian3,.pt-dian4,.pt-dian5,.pt-text{
@@ -112,8 +112,13 @@ background-size:100% ;
 	top: 135px;
 	left: 19px;
 }
+
 /*动画之前*/
-.pt-quan1,.pt-quan2,.pt-quan3,.pt-quan4,.pt-ditu,.pt-dian1,.pt-dian2,.pt-dian3,.pt-dian4,.pt-dian5{
+.pt-ditu{
+	opacity: 0.5;
+	*filter: alpha(opacity=50);
+}
+.pt-quan1,.pt-quan2,.pt-quan3,.pt-quan4,.pt-dian1,.pt-dian2,.pt-dian3,.pt-dian4,.pt-dian5{
 	opacity: 0;
 	*filter: alpha(opacity=0);
 }
