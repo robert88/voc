@@ -15,6 +15,85 @@
         return (val <= min) ? min : ((val <= max) ? val : max);
     }
 
+    function getMedia(minh, maxh) {
+        var str = [
+            '',
+            '.height1-6{',
+            'height:{0}rem;',
+            '}',
+            '.height1-6.mid{',
+            'line-height:{0}rem;',
+            "}",
+            '.height1-12{',
+            'height: {1}rem;',
+            '}',
+            '.height1-12.mid{',
+            'line-height:{1}rem;',
+            "}",
+            '.height1-3{',
+            'height: {2}rem;',
+            '}',
+            '.height1-3.mid{',
+            'line-height:{2}rem;',
+            "}",
+            '.height1-4{',
+            'height: {3}rem;',
+            '}',
+            '.height1-4.mid{',
+            'line-height:{3}rem;',
+            "}",
+            '.height1-8{',
+            'height: {4}rem;',
+            '}',
+            '.height1-8.mid{',
+            'line-height:{4}rem;',
+            "}",
+            "}"
+        ]
+        if (minh && !maxh) {
+            str[0] = '@media screen and (max-height: {0}px){'.tpl(minh);
+        } else if (minh && maxh) {
+            str[0] = '@media screen and (min-height: {0}px) and (max-height: {1}px) {'.tpl(minh, maxh);
+        } else {
+            str[0] = '@media screen and (min-height: {0}px)  {'.tpl(maxh);
+        }
+        var curh = (maxh || minh);
+        var remroot = getResize(800, 350, curh, 125, 75);
+        var setH = curh / (remroot / 100 * 16);
+
+        return str.join("").tpl(setH / 6, setH / 12, setH / 3, setH / 4, setH / 8);
+
+    }
+
+
+    function initStyle() {
+        var styleStr = [
+            getMedia(350, null)
+        ]
+
+        for (var i = 350; i < 800; i += 50) {
+            styleStr.push(getMedia(i, i + 50))
+        }
+        styleStr.push(getMedia(null, 800))
+        $("head").append("<style>{0}</style>".tpl(styleStr.join("")));
+    }
+
+
+    var preh;
+
+    function changeRootrem() {
+        var h = getRagen($(window).height(), 1080, 500);
+        var remroot = getResize(800, 500, h, 125, 75)
+        if (preh == h) {
+            return remroot;
+        }
+        preh = h;
+        /*12/16=0.75,20/16=1.25*/
+        $("html").css("font-size", remroot + "%");
+        return remroot;
+    }
+
+
     /*left自适应*/
     function resizeLeft($targe, h) {
         var paddingTop = getResize(maxHeight, minHeight, h, 120, 0);
@@ -42,6 +121,7 @@
 
     /*自适应*/
     function resizeLayout() {
+
         var h = getRagen($(window).height(), maxHeight, minHeight);
         var $curpage = $(".page.current");
         resizeLeft($curpage.find(".pageleft"), h);
@@ -51,11 +131,12 @@
     }
 
     $(window).resize(function () {
-        resizeLayout()
+        // resizeLayout();
+        changeRootrem()
     })
-
+    changeRootrem();
     $(function () {
-        resizeLayout()
+        // resizeLayout()
     });
 })();
 
@@ -95,7 +176,7 @@ $(function () {
         var count = 0;
         g_cont++
         var def = {
-            duration: ".5s",
+            duration: ".1s",
             property: "all",
             timingFunction: "ease-in-out",
             delay: ".1s",
@@ -245,6 +326,9 @@ $(function () {
         for(var i=0;i<lineTos.length;i++){
             var dian2 = dianInfo[(lineTos[i]*1)||0];
             drawLine(dian,dian2,opts);
+            drawLine(dian,dian2,opts);
+            drawLine(dian,dian2,opts);
+            drawLine(dian,dian2,opts);
             var lineId = "dian"+dian.index+"dian"+dian2.index;
             if(dian[lineId]&&dian[lineId].lineok){
                 count++
@@ -337,7 +421,7 @@ $(function () {
             return;
         }
         clearTimeout(opts.canvasTimer.data("timer"))
-        opts.canvasTimer.data("timer",setTimeout(initCanvasAnimate2,80,romand,dianInfo,opts)) ;
+        opts.canvasTimer.data("timer",setTimeout(initCanvasAnimate2,40,romand,dianInfo,opts)) ;
     }
 
     function initCanvasDian2(dian,dianInfo,opts){
@@ -374,6 +458,7 @@ $(function () {
                         addCSS3Animate($(".pt-line1,.pt-line2,.pt-line3,.pt-line4")).done(function () {
                             addCSS3Animate($(".pt-dian2,.pt-dian3,.pt-dian4,.pt-dian5")).done(function () {
                                 /*切换到下一页*/
+                                return;
                                 waitGoNextPage($this, $this.next(),7000);
                             })
                         })
@@ -400,6 +485,7 @@ $(function () {
                     $(".yq-quan2").addClass("animate-infinite-rev");
                     addCSS3Animate($(".yq-diqiu")).done(function () {
                         canvasAnimate(opts,dianInfo).done(function () {
+                            return;
                             /*切换到下一页*/
                             waitGoNextPage($this, $this.next(),7000);
                         })
@@ -414,7 +500,7 @@ $(function () {
             var $this = $(this);
             var dianInfo = [{"x":176.33331298828125,"y":120,"index":0},{"x":255.33331298828125,"y":75,"index":1},{"x":281.33331298828125,"y":120,"index":2},{"x":334.33331298828125,"y":121,"index":3},{"x":360.33331298828125,"y":75,"index":4},{"x":412.33331298828125,"y":75,"index":5},{"x":437.33331298828125,"y":120,"index":6},{"x":492.33331298828125,"y":120,"index":7},{"x":515.3333129882812,"y":75,"index":8},{"x":567.3333129882812,"y":74,"index":9},{"x":595.3333129882812,"y":119,"index":10},{"x":673.3333129882812,"y":162,"index":11},{"x":568.3333129882812,"y":165,"index":12},{"x":570.3333129882812,"y":256,"index":13},{"x":515.3333129882812,"y":165,"index":14},{"x":489.33331298828125,"y":211,"index":15},{"x":517.3333129882812,"y":255,"index":16},{"x":412.33331298828125,"y":166,"index":17},{"x":437.33331298828125,"y":211,"index":18},{"x":410.33331298828125,"y":256,"index":19},{"x":437.33331298828125,"y":302,"index":20},{"x":357.33331298828125,"y":257,"index":21},{"x":331.33331298828125,"y":210,"index":22},{"x":358.33331298828125,"y":165,"index":23},{"x":279.33331298828125,"y":210,"index":24},{"x":201.33331298828125,"y":255,"index":25},{"x":174.33331298828125,"y":210,"index":26},{"x":98.33331298828125,"y":165,"index":27},{"x":122.33331298828125,"y":120,"index":28},{"x":201.33331298828125,"y":165,"index":29},{"x":254.33331298828125,"y":165,"index":30},{"x":333.33331298828125,"y":300,"index":31},{"x":254.33331298828125,"y":254,"index":32}]
             var opts = {
-                count: 0,//随机计数
+                count: 10,//随机计数
                 dtd: $.Deferred(),// 新建一个deferred对象
                 c: $(".wt-dian")[0],//画布
                 ctx: $(".wt-dian")[0].getContext("2d"),//画布
@@ -433,6 +519,7 @@ $(function () {
                                             addCSS3Animate($(".wt-renwu7")).done(function () {
                                                 addCSS3Animate($(".wt-renwu5"),{duration:".2s"}).then(function () {
                                                     addCSS3Animate($(".wt-renwu4")).done(function () {
+                                                        return;
                                                         waitGoNextPage($this, $this.next(), 7000);
                                                     })
                                                 })
@@ -456,6 +543,7 @@ $(function () {
                     $(".bz-neiquan").addClass("animate-infinite-rev");
                     addCSS3Animate($(".bz-dunpai")).done(function () {
                         addCSS3Animate($(".bz-flash"),{timingFunction:"cubic-bezier(.47,-0.05,.69,1.69)"}).done(function () {
+                            return;
                             waitGoNextPage($this, $this.next(),7000);
                         })
                     })
@@ -481,6 +569,8 @@ $(function () {
                                 addCSS3Animate($(".jp-item2 .jp-info")).done(function () {
                                     addCSS3Animate($(".jp-item2 .jp-people")).done(function () {
                                         addCSS3Animate($(".jp-item2 .jp-zhu2")).done(function () {
+                                            return;
+
                                             waitGoNextPage($this, $this.next(),7000);
                                         })
                                     })
@@ -621,12 +711,15 @@ $(function () {
     var vSwiper = new Swiper('.swiper-container',{
         speed: 1000,
         parallax:true,
-        // nextButton: '.arrow-right',
-        // prevButton: '.arrow-left',
+        initialSlide:1,
+        nextButton: '.arrow-right',
+        prevButton: '.arrow-left',
         paginationClickable: true,
         pagination:".swiper-pagination",
         onSlideChangeStart:function () {
-            goNextPage($(".page").eq(vSwiper.previousIndex),$(".page").eq(vSwiper.activeIndex));
+            if(vSwiper){
+                goNextPage($(".page").eq(vSwiper.previousIndex),$(".page").eq(vSwiper.activeIndex));
+            }
         }
     })
 

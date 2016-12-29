@@ -7,11 +7,8 @@
 	background: #68ffe0 ;
 }
 .bz-page .pageAniGroup{
-	left:0;top:-40px;
-	position:absolute;
-	/*background: url(./images/bz/报障图形.png);*/
-	width: 720px;
-	height: 588px;
+	left: -18px;
+	top: -135px;
 }
 .bz-dunpai,.bz-flash,.bz-ditu,.bz-neiquan{
 	position: absolute;

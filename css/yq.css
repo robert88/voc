@@ -6,11 +6,10 @@
 	background: #65bffe  ;
 }
 .yq-page .pageAniGroup{
-	position:absolute;
+
 	left:0px;
-	top:0px;
-	width: 720px;
-	height: 588px;
+	top: -101px;
+
 	/*background: url(./images/yq/舆情图形.png);*/
 	/*width: 801px;*/
 	/*height: 570px;*/

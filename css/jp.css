@@ -1,11 +1,8 @@
 
 /*s竞品分析*/
 .jp-page .pageAniGroup{
-	left:0;top:-40px;
-	position:absolute;
-	/*background: url(./images/bz/报障图形.png);*/
-	width: 720px;
-	height: 588px;
+	left: -15px;
+	top: -96px;
 }
 .jp-page .fristLetter{
 	color:#9b96fd;

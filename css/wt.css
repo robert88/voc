@@ -10,12 +10,8 @@
 	transform: scale(0.8)
 }
 .wt-page .pageAniGroup{
-	left:-10px;
-	top:-10px;
-	position:absolute;
-	width: 720px;
-	height: 588px;
-	/*background: url(./images/pt/平台图形.png);*/
+	left: -21px;
+	top: -86px;
 }
 .wt-ditu,.wt-dian,.wt-liubian,.wt-liubian-light,.wt-liubian-hui,.wt-renwu,.wt-renwu1,.wt-renwu2,.wt-renwu3,.wt-renwu4,.wt-renwu5,.wt-renwu6,.wt-renwu7,.wt-renwu8{
 	position: absolute;
