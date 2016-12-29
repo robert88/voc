@@ -124,6 +124,7 @@ background-size:100% ;
 .pt-line1,.pt-line2,.pt-line3,.pt-line4{
 	clip:rect(0px 321px 392px 321px);
 }
+
 /*动画之后*/
 .pt-quan1.animate-show,
 .pt-quan2.animate-show,

@@ -10,10 +10,10 @@
 	left: -18px;
 	top: -135px;
 }
-.bz-dunpai,.bz-flash,.bz-ditu,.bz-neiquan{
+.bz-dunpai,.bz-flash,.bz-ditu,.bz-neiquan,.bz-dian,.bz-shaomiao{
 	position: absolute;
 	display: block;
-	left:0px;
+	left:px;
 	top:0px;
 }
 .bz-dunpai,.bz-flash,.bz-neiquan{
@@ -21,6 +21,12 @@
 	height: 400px;
 	left:40px;
 	top:98px;
+}
+.bz-shaomiao{
+	width: 476px;
+	height: 476px;
+	left:-1px;
+	top:61px;
 }
 .bz-ditu{
 	width: 720px;
@@ -32,7 +38,7 @@
 	opacity: 0.5;
 	*filter: alpha(opacity=50);
 }
-.bz-dunpai,.bz-flash,.bz-neiquan{
+.bz-dunpai,.bz-flash,.bz-neiquan,.bz-shaomiao{
 	opacity: 0;
 	*filter: alpha(opacity=0);
 }
@@ -44,7 +50,8 @@
 .bz-ditu.animate-show,
 .bz-neiquan.animate-show,
 .bz-flash.animate-show,
-.bz-dunpai.animate-show
+.bz-dunpai.animate-show,
+.bz-shaomiao.animate-show
 {
 	opacity: 1;
 	*filter: alpha(opacity=100);

@@ -62,3 +62,65 @@ var drag =function(seletor){
         }
     }
 }
+var infoData=[];
+
+var getInfo =function(seletor){
+    var c = $(seletor)[0];
+    var ctx = c.getContext("2d");
+    var x,y,flag
+    var left,top;
+    var curInfo;
+    $(seletor).on("mousedown",function (e) {
+
+        curInfo = {
+            x:e.pageX-$(this).offset().left,
+            y:e.pageY-$(this).offset().top
+        }
+        infoData.push(curInfo);
+        drawArc()
+    })
+
+    $(document).on("keydown",function (e) {
+
+        if(e.key=="ArrowRight"){
+            if(curInfo){
+                curInfo.x++;
+            }
+            drawArc()
+        }else if(e.key=="ArrowLeft"){
+            if(curInfo){
+                curInfo.x--;
+            }
+            drawArc()
+        }
+        else if(e.key=="ArrowUp"){
+            if(curInfo){
+                curInfo.y--;
+            }
+            drawArc()
+        }
+        else if(e.key=="ArrowDown"){
+            if(curInfo){
+                curInfo.y++;
+            }
+            drawArc()
+        }
+    })
+    function drawArc() {
+        c.width = c.width;
+        for(var i=0;i<infoData.length;i++){
+            drawArcOne(infoData[i])
+        }
+    }
+    function drawArcOne(dian) {
+
+        //开始一个新的绘制路径
+        ctx.beginPath();
+        //设置弧线的颜色为蓝色
+        r =1
+        ctx.fillStyle = "red";
+        //沿着坐标点(100,100)为圆心、半径为50px的圆的顺时针方向绘制弧线
+        ctx.arc(dian.x, dian.y, r, 0, Math.PI * 2, false);
+        ctx.fill()
+    }
+}

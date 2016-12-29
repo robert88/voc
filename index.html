@@ -39,8 +39,8 @@
         }
 
         header {
-            padding-left: 21rem;
-            padding-right: 21rem;
+            padding-left: 20%;
+            padding-right: 20%;
             line-height: 5rem;
             height: 5rem;
             position: relative;
@@ -146,21 +146,22 @@
         .page .pageleft{
             width:50%;
             left:2%;
-            border: 1px solid green;
+            /*border: 1px solid green;*/
         }
         .page .pageright{
             left:39%
         }
         .page .pageAniGroup {
             /*transform: translate(2%,0px) scale(0.6);*/
+            transform: translate(17%,13%) scale(1);
             position:absolute;
             width: 720px;
             height: 588px;
-            border:1px solid blue;
+            /*border:1px solid blue;*/
 
         }
         .page .pageright{
-            border:1px solid red;
+            /*border:1px solid red;*/
         }
         .page .info{
             line-height: 2.3rem;
@@ -180,15 +181,22 @@
             left:0px;
             bottom:0px;
         }
-        .page .quan{
-            background: url(./images/quan.png) no-repeat;
-            background-size: 100% 100%;
+        .page .quanWrap{
+            position:relative;
             width: 8.5rem;
             height: 8.5rem;
             line-height: 8.5rem;
             text-align: center;
             font-size: 2rem;
             display: inline-block;
+        }
+        .page .quan{
+            background: url(./images/quan.png) no-repeat;
+            background-size: 100% 100%;
+            position:absolute;
+            width: 100%;
+            height: 100%;
+            left:0;top:0;
         }
         .page .toji>li{
             float: left;
@@ -229,6 +237,7 @@
             opacity: 1;
             background: #fff;
         }
+
 
     </style>
 </head>
@@ -272,15 +281,21 @@
         <ul class="toji col" data-swiper-parallax="-3500">
             <li>
                 <p>
-                    <span class="quan webfont"><span class="num animateCountUp" data-num="579">0</span>条</span>
+                    <span class="quanWrap webfont">
+                        <span class="quan"></span>
+                        <span class="num animateCountUp" data-num="579">0</span>条
+                    </span>
                 </p>    
                 <p>华为源声量</p>
             </li>
             <li>
                 <p>
-                    <span class="quan webfont"><span class="num animateCountUp" data-num="579">0</span>条</span>
+                    <span class="quanWrap webfont">
+                        <span class="quan"></span>
+                        <span class="num animateCountUp" data-num="579">0</span>条
+                    </span>
                 </p>    
-                <p>竞品源声量</p>
+                <p>保障源声量</p>
             </li>
         </ul>
         </div>
@@ -308,7 +323,7 @@
 
 
     <!--s舆情分析-->
-    <section class="page yq-page swiper-slide current" data-bg="./images/yq/yq_bg.jpg">
+    <section class="page yq-page swiper-slide" data-bg="./images/yq/yq_bg.jpg">
         <div class="wrap col">
         <div class="pageleft">
             <a class="a-wrap" href="#">
@@ -322,13 +337,19 @@
             <ul class="toji col"  data-swiper-parallax="-3500">
                 <li>
                     <p>
-                        <span class="quan webfont"><span class="num animateCountUp" data-num="579">0</span>条</span>
+                        <span class="quanWrap webfont">
+                            <span class="quan"></span>
+                            <span class="num animateCountUp" data-num="579">0</span>条
+                        </span>
                     </p>
                     <p>昨日新增发帖</p>
                 </li>
                 <li>
                     <p>
-                        <span class="quan webfont"><span class="num animateCountUp" data-num="579">0</span>条</span>
+                        <span class="quanWrap webfont">
+                            <span class="quan"></span>
+                            <span class="num animateCountUp" data-num="579">0</span>条
+                        </span>
                     </p>
                     <p>本月累计发帖</p>
                 </li>
@@ -361,22 +382,31 @@
             <ul class="toji col" data-swiper-parallax="-3500">
                 <li>
                     <p>
-                        <span class="quan webfont"><span class="num animateCountUp" data-num="579">0</span>条</span>
+                        <span class="quanWrap webfont">
+                            <span class="quan"></span>
+                            <span class="num animateCountUp" data-num="579">0</span>条
+                        </span>
                     </p>
-                    <p>累计问题总量</p>
+                    <p>今日问题总量</p>
                 </li>
                 <li>
                     <p>
-                        <span class="quan webfont"><span class="num animateCountUp" data-num="579">0</span>条</span>
+                        <span class="quanWrap webfont">
+                            <span class="quan"></span>
+                            <span class="num animateCountUp" data-num="579">0</span>条
+                        </span>
                     </p>
-                    <p>昨日问题总量</p>
+                    <p>本周问题总量</p>
                 </li>
 
                 <li>
                     <p>
-                        <span class="quan webfont"><span class="num animateCountUp" data-num="579">0</span>条</span>
+                        <span class="quanWrap webfont">
+                            <span class="quan"></span>
+                            <span class="num animateCountUp" data-num="579">0</span>条
+                        </span>
                     </p>
-                    <p>今日问题总量</p>
+                    <p>本月问题总量</p>
                 </li>
             </ul>
         </div>
@@ -397,6 +427,7 @@
                 <div data-img="./images/wt/wt_renwu6.png" class="wt-renwu6"></div>
                 <div data-img="./images/wt/wt_renwu7.png" class="wt-renwu7"></div>
                 <div data-img="./images/wt/wt_renwu8.png" class="wt-renwu8"></div>
+
             </div>
         </div>
         </div>
@@ -419,9 +450,10 @@
             <div class="pageAniGroup" data-max-top="-20" data-min-top="-40">
                 <div data-img="./images/bz/bz_ditu.png" class="bz-ditu"></div>
                 <div data-img="./images/bz/bz_neiquan.png" class="bz-neiquan"></div>
+                <div data-img="./images/bz/bz_shaomiao.png" class="bz-shaomiao"></div>
                 <div data-img="./images/bz/bz_dunpai.png" class="bz-dunpai"></div>
                 <div data-img="./images/bz/bz_flash.png" class="bz-flash"></div>
-
+                <canvas class="bz-dian" width="720" height="588"></canvas>
             </div>
         </div>
         </div>
@@ -430,10 +462,10 @@
 
 
     <!--s竞品分析-->
-    <section class="page jp-page swiper-slide" data-bg="./images/jp/jp_bg.jpg">
+    <section class="page jp-page swiper-slide current" data-bg="./images/jp/jp_bg.jpg">
         <div class="wrap col">
         <div class="pageleft">
-            <h2 class="fristLetter" data-swiper-parallax="-500"><i class="underline"></i>竞品分析</h2>
+            <h2 class="fristLetter webfont" data-swiper-parallax="-500"><i class="underline"></i>竞品分析</h2>
             <div class="info" data-swiper-parallax="-1500">
                 <p>用户视角，见微知著，帮你看清孰强孰弱。</p>
                 <p> 更全面的竞品对比，无论是产品整体还是产品细节。</p>
@@ -455,7 +487,7 @@
                         <img src="./images/jp/jp_light.png" alt="">
                     </div>
                     <div data-img="./images/jp/jp_people.png" class="jp-people"></div>
-                    <div data-img="./images/jp/jp_zhu1.png" class="jp-zhu1"></div>
+                    <div data-img="./images/jp/jp_zhu.png" class="jp-zhu1"></div>
                 </div>
                 <div data-img="./images/jp/jp_pk.png" class="jp-pk"></div>
                 <div class="jp-item2">
@@ -472,8 +504,9 @@
                         <img src="./images/jp/jp_light.png" alt="">
                     </div>
                     <div data-img="./images/jp/jp_people.png" class="jp-people"></div>
-                    <div data-img="./images/jp/jp_zhu2.png" class="jp-zhu2"></div>
+                    <div data-img="./images/jp/jp_zhu.png" class="jp-zhu2"></div>
                 </div>
+                <canvas class="jp-zhu" width="610" height="310"></canvas>
             </div>
         </div>
         </div>

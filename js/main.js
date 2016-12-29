@@ -61,83 +61,83 @@
         }
         return that;
     };
-
-    function initStyle() {
-        var styleStr = [
-            /*顺时针旋转*/
-            ".animate-rotate{",
-                "{0}animation: rotate 8s linear infinite;",
-            "}",
-            "@{0}keyframes rotate{",
-                "0 %,100 % {",
-                    "{0}transform:rotate(0deg);",
-                 "}",
-                "100 % {",
-                    "{0}transform:rotate(360deg);",
-                "}",
-            "}",
-                /*逆时针旋转*/
-            ".animate-rotate-rev{",
-                "{0}animation: rotate-rev 8s linear infinite;",
-            "}",
-
-            "@{0}keyframes rotate-rev{",
-                "0 %,100 % {",
-                    "{0}transform:rotate(360deg);",
-                "}",
-                "100 % {",
-                    "{0}transform:rotate(0deg);",
-                "}",
-            "}",
-                /*旋转一次*/
-            ".animate-rotate-noce{",
-                "{0}transform:rotate(360deg);",
-            "}",
-            /*水平移动*/
-            ".animate-move{",
-            "{0}animation: move 4s linear infinite;",
-            "}",
-            "@{0}keyframes move{",
-                "0%{{0}transform: translateX(-100px) scale(0,1);opacity: 0;}",
-                "50%{{0}transform: translateX(40px) scale(1,1);opacity: 1;}",
-                "100%{{0}transform: translateX(180px) scale(0,1);opacity: 0;}",
-            "}",
-            /*反方向水平移动*/
-            ".animate-move-v-2{",
-            "{0}animation: move-v-2 4s linear infinite;",
-            "}",
-            "@{0}keyframes move-v-2{",
-            "0%{{0}transform: translateX(180px) scale(0,1);opacity: 0;}",
-            "50%{{0}transform: translateX(40px) scale(1,1);opacity: 1;}",
-            "100%{{0}transform: translateX(-100px) scale(0,1);opacity: 0;}",
-            "}",
-            /*方向垂直移动*/
-            ".animate-move-h{",
-            "{0}animation: move-h 4s linear infinite;",
-            "}",
-            "@{0}keyframes move-h{",
-            "0%{{0}transform: translateY(-100px) scale(0,1);opacity: 0;}",
-            "50%{{0}transform: transform:translateY(90px) scale(1,1);opacity: 1;}",
-            "100%{{0}transform: transform:translateY(280px) scale(0,1);opacity: 0;}",
-            "}",
-
-        ]
-        var map = {
-                'O': '-o-',
-                'Moz': '-moz-',
-                'Webkit': '-webkit-',
-                'Ms': '-ms-',
-            }
-
-        $("head").append("<style>{0}</style>".tpl( styleStr.join("").tpl(map[CSS3FLAG]||"") ));
-    }
+    //
+    // function initStyle() {
+    //     var styleStr = [
+    //         /*顺时针旋转*/
+    //         ".animate-rotate{",
+    //             "{0}animation: rotate 8s linear infinite;",
+    //         "}",
+    //         "@{0}keyframes rotate{",
+    //             "0 %,100 % {",
+    //                 "{0}transform:rotate(0deg);",
+    //              "}",
+    //             "100 % {",
+    //                 "{0}transform:rotate(360deg);",
+    //             "}",
+    //         "}",
+    //             /*逆时针旋转*/
+    //         ".animate-rotate-rev{",
+    //             "{0}animation: rotate-rev 8s linear infinite;",
+    //         "}",
+    //
+    //         "@{0}keyframes rotate-rev{",
+    //             "0 %,100 % {",
+    //                 "{0}transform:rotate(360deg);",
+    //             "}",
+    //             "100 % {",
+    //                 "{0}transform:rotate(0deg);",
+    //             "}",
+    //         "}",
+    //             /*旋转一次*/
+    //         ".animate-rotate-noce{",
+    //             "{0}transform:rotate(360deg);",
+    //         "}",
+    //         /*水平移动*/
+    //         ".animate-move{",
+    //         "{0}animation: move 4s linear infinite;",
+    //         "}",
+    //         "@{0}keyframes move{",
+    //             "0%{{0}transform: translateX(-100px) scale(0,1);opacity: 0;}",
+    //             "50%{{0}transform: translateX(40px) scale(1,1);opacity: 1;}",
+    //             "100%{{0}transform: translateX(180px) scale(0,1);opacity: 0;}",
+    //         "}",
+    //         /*反方向水平移动*/
+    //         ".animate-move-v-2{",
+    //         "{0}animation: move-v-2 4s linear infinite;",
+    //         "}",
+    //         "@{0}keyframes move-v-2{",
+    //         "0%{{0}transform: translateX(180px) scale(0,1);opacity: 0;}",
+    //         "50%{{0}transform: translateX(40px) scale(1,1);opacity: 1;}",
+    //         "100%{{0}transform: translateX(-100px) scale(0,1);opacity: 0;}",
+    //         "}",
+    //         /*方向垂直移动*/
+    //         ".animate-move-h{",
+    //         "{0}animation: move-h 4s linear infinite;",
+    //         "}",
+    //         "@{0}keyframes move-h{",
+    //         "0%{{0}transform: translateY(-100px) scale(0,1);opacity: 0;}",
+    //         "50%{{0}transform:translateY(90px) scale(1,1);opacity: 1;}",
+    //         "100%{{0}transform:translateY(280px) scale(0,1);opacity: 0;}",
+    //         "}",
+    //
+    //     ]
+    //     var map = {
+    //             'O': '-o-',
+    //             'Moz': '-moz-',
+    //             'Webkit': '-webkit-',
+    //             'Ms': '-ms-',
+    //         }
+    //
+    //     $("head").append("<style>{0}</style>".tpl( styleStr.join("\n").tpl(map[CSS3FLAG]||"") ));
+    // }
 
 
     var preh;
 
     function changeRootrem() {
         var h = getRagen($(window).height(), 1080, 500);
-        var remroot = getResize(800, 500, h, 125, 75)
+        var remroot = getResize(800, 500, h, 100, 75)
         if (preh == h) {
             return remroot;
         }
@@ -177,25 +177,36 @@
     function resizeLayout() {
 
         var h = getRagen($(window).height(), maxHeight, minHeight);
-        var $curpage = $(".page.current");
-        resizeLeft($curpage.find(".pageleft"), h);
-        resizeHeader($("header"), h);
-        resizePageAniGroup($curpage.find(".pageAniGroup"), h)
-        resizePageAniGroupByScale($curpage.find(".pageAniGroup"), h)
+        // var $curpage = $(".page.current");
+        // resizeLeft($curpage.find(".pageleft"), h);
+        // resizeHeader($("header"), h);
+        // resizePageAniGroup($curpage.find(".pageAniGroup"), h)
+        // resizePageAniGroupByScale($curpage.find, h)
+            var map = {
+                    'O': '-o-',
+                    'Moz': '-moz-',
+                    'Webkit': '-webkit-',
+                    'Ms': '-ms-',
+                }
+        var x = getResize(maxHeight, minHeight, h, 17, 2);
+        var y = getResize(maxHeight, minHeight, h, 13, 0);
+        var s = getResize(maxHeight, minHeight, h, 1, 0.6);
+        $(".pageAniGroup").css((map[CSS3FLAG]||"")+"transform","translate("+x+"%,"+y+"%) scale("+s+")");
+
     }
 
     $(window).resize(function () {
-        // resizeLayout();
+        resizeLayout();
         changeRootrem()
     })
 
     changeRootrem();
-    initStyle();
+    // initStyle();
 
     /*page动画处理*/
 
     $(function () {
-
+        resizeLayout();
         /*css3动画promise*/
         var css3AnimateEndEventMap = {
             // '': 'transitionend',
@@ -311,15 +322,16 @@
         }
 
         /*循环计数*/
-        function rollBack(obj, max, min) {
+        function rollBack(obj, max, min,time) {
+             time = time||1;
             if (obj.start == max) {
-                obj.count--;
-                if (obj.count == min) {
+                obj.count-=time;
+                if (obj.count <= min) {
                     obj.start = min;
                 }
             } else {
-                obj.count++;
-                if (obj.count == max) {
+                obj.count+=time;
+                if (obj.count >= max) {
                     obj.start = max;
                 }
             }
@@ -486,17 +498,79 @@
 
             dian.count = dian.count || 0;
             dian.start = dian.start || 0;
-            r = rollBack(dian, 6, 2);
-            ctx.shadowColor = "#ffffff";
+            r = rollBack(dian, opts.maxR, opts.minR);
+            ctx.shadowColor = opts.color
             ctx.shadowOffsetX = 0;
             ctx.shadowOffsetY = 0;
-            ctx.shadowBlur = 10;
-            ctx.fillStyle = "#ffffff";
+            ctx.shadowBlur = opts.shadowWidth;
+            ctx.fillStyle = opts.color;
             //沿着坐标点(100,100)为圆心、半径为50px的圆的顺时针方向绘制弧线
             ctx.arc(dian.x, dian.y, r, 0, Math.PI * 2, false);
             ctx.fill()
         }
 
+        /*---------------------循环画框--------------------------------------*/
+        /*canvas动画*/
+        function canvasAnimate3(opts, dianInfo) {
+            var baseY = 112;
+            var baseH = 9;
+            var baseSpace = 3;
+            var baseBigSpace = 9;
+            for(var i=0;i<dianInfo.length;i++){
+                if(i==0||(i==dianInfo.length/2)){
+                    dianInfo[i].y = baseY;
+                }else{
+                    if(i%2){
+                        dianInfo[i].y = dianInfo[i-1].y+baseSpace+baseH;
+                    }else{
+                        dianInfo[i].y = dianInfo[i-1].y+baseBigSpace+baseH;
+                    }
+                }
+                dianInfo[i].h = baseH;
+            }
+
+            initCanvasAnimate3(dianInfo, opts)
+            return opts.dtd;
+        }
+
+        function initCanvasAnimate3( dianInfo, opts) {
+            var maxLen =  Math.floor(dianInfo.length/2);
+
+            var len = rollUp(opts,maxLen);
+            if (maxLen == len ) {
+                opts.end = true
+                opts.dtd.resolve(); // 改变deferred对象的执行状态
+            }
+
+            opts.c.width = opts.c.width;
+
+            for (var i = 0; i < len; i++) {
+                initCanvaskuang3(dianInfo[i], opts)
+                initCanvaskuang3(dianInfo[i+maxLen], opts)
+            }
+            /*计算器清不掉，resolve就会触发*/
+            if (opts.canvasTimer.data("lock")) {
+                opts.c.width = opts.c.width;
+                console.log("clear")
+                return;
+            }
+            clearTimeout(opts.canvasTimer.data("timer"))
+            opts.canvasTimer.data("timer", setTimeout(initCanvasAnimate3, 40,dianInfo, opts));
+        }
+
+        function initCanvaskuang3(kuang, opts) {
+            var c = opts.c;
+            var ctx = opts.ctx;
+            //开始一个新的绘制路径
+            ctx.beginPath();
+            //设置弧线的颜色为蓝色
+
+            kuang.count = kuang.count || 0;
+            kuang.start = kuang.start || 0;
+            var w = rollBack(kuang,  kuang.w,0,4);
+            ctx.fillStyle = opts.color;
+            ctx.fillRect(kuang.x,kuang.y,w,kuang.h);
+        }
         /*动画和页面切换*/
         function initPageEvent() {
 
@@ -660,7 +734,11 @@
                     dtd: $.Deferred(),// 新建一个deferred对象
                     c: $(".yq-dian")[0],//画布
                     ctx: $(".yq-dian")[0].getContext("2d"),//画布
-                    canvasTimer: $this.data("lock", false)
+                    canvasTimer: $this.data("lock", false),
+                    color:"#ffffff",
+                    minR:2,
+                    maxR:6,
+                    shadowWidth:10
                 }
                 addCSS3Animate($(".yq-quan1")).done(function () {
                     addCSS3Animate($(".yq-quan2")).done(function () {
@@ -751,20 +829,24 @@
                     dtd: $.Deferred(),// 新建一个deferred对象
                     c: $(".wt-dian")[0],//画布
                     ctx: $(".wt-dian")[0].getContext("2d"),//画布
-                    canvasTimer: $this.data("lock", false)
+                    canvasTimer: $this.data("lock", false),
+                    color:"#ffffff",
+                    minR:2,
+                    maxR:6,
+                    shadowWidth:10
                 }
 
                 $this.data("status") == "animating"
                 addCSS3Animate($(".wt-ditu")).done(function () {
                     addCSS3Animate($(".wt-liubian,.wt-liubian-light"), {duration: "1s"}).done(function () {
-                        canvasAnimate2(opts, dianInfo).done(function () {
-                            addCSS3Animate($(".wt-renwu2"), {duration: ".2s"}).done(function () {
+                            canvasAnimate2(opts, dianInfo).done(function () {})
+                            addCSS3Animate($(".wt-renwu2")).done(function () {
                                 addCSS3Animate($(".wt-renwu3")).done(function () {
-                                    addCSS3Animate($(".wt-renwu8"), {duration: ".3s"}).done(function () {
+                                    addCSS3Animate($(".wt-renwu8")).done(function () {
                                         addCSS3Animate($(".wt-renwu1")).done(function () {
                                             addCSS3Animate($(".wt-renwu6")).then(function () {
                                                 addCSS3Animate($(".wt-renwu7")).done(function () {
-                                                    addCSS3Animate($(".wt-renwu5"), {duration: ".2s"}).then(function () {
+                                                    addCSS3Animate($(".wt-renwu5")).then(function () {
                                                         addCSS3Animate($(".wt-renwu4")).done(function () {
                                                             return;
                                                             waitGoNextPage($this, $this.next(), 7000);
@@ -776,18 +858,37 @@
                                     })
                                 })
                             })
-                        })
+
                     })
                 })
             })
 
             /*报障*/
             $(".bz-page").on("ready", function () {
+
+                var dianInfo = [{"x":367.760009765625,"y":31.784378051757812},{"x":379.760009765625,"y":19.784378051757812},{"x":452.760009765625,"y":51.78437805175781},{"x":516.760009765625,"y":51.78437805175781},{"x":528.760009765625,"y":87.78437805175781},{"x":510.760009765625,"y":112.78437805175781},{"x":557.760009765625,"y":121.78437805175781},{"x":616.760009765625,"y":155.7843780517578},{"x":519.760009765625,"y":164.7843780517578},{"x":583.760009765625,"y":194.7843780517578},{"x":634.760009765625,"y":204.7843780517578},{"x":523.760009765625,"y":251.7843780517578},{"x":480.760009765625,"y":296.7843780517578},{"x":498.760009765625,"y":359.7843780517578},{"x":596.760009765625,"y":370.7843780517578},{"x":607.760009765625,"y":472.7843780517578},{"x":714.760009765625,"y":533.7843780517578},{"x":646.760009765625,"y":582.7843780517578},{"x":517.760009765625,"y":536.7843780517578},{"x":526.760009765625,"y":516.7843780517578}]
+                for(var i=0;i<dianInfo.length;i++){
+                    dianInfo[i].index = i;
+                }
                 var $this = $(this);
+                var opts = {
+                    count: 10,//随机计数
+                    dtd: $.Deferred(),// 新建一个deferred对象
+                    c:$(this).find("canvas")[0],//画布
+                    ctx: $(this).find("canvas")[0].getContext("2d"),//画布
+                    canvasTimer: $this.data("lock", false),
+                    color:"#80c0d7",
+                    minR:2,
+                    maxR:6,
+                    shadowWidth:10
+                }
+
                 $this.data("status") == "animating"
                 addCSS3Animate($(".bz-ditu")).done(function () {
-                    addCSS3Animate($(".bz-neiquan")).done(function () {
-                        $(".bz-neiquan").addClass("animate-rotate-rev");
+                    canvasAnimate2(opts, dianInfo).done(function () {})
+                    addCSS3Animate($(".bz-neiquan,.bz-shaomiao")).done(function () {
+                        // $(".bz-neiquan").addClass("animate-rotate-rev");
+                        $(".bz-shaomiao").addClass("animate-rotate");
                         addCSS3Animate($(".bz-dunpai")).done(function () {
                             addCSS3Animate($(".bz-flash"), {timingFunction: "cubic-bezier(.47,-0.05,.69,1.69)"}).done(function () {
                                 return;
@@ -800,29 +901,43 @@
 
             /*竞品*/
             $(".jp-page").on("ready", function () {
-                var $this = $(this);
-                $this.data("status") == "animating"
-                addCSS3Animate($(".jp-item1 .jp-kuang")).then(function () {
-                    $(".jp-item1 .jp-light1>img").addClass("animate-move")
-                    $(".jp-item1 .jp-light3>img").addClass("animate-move-v-2")
-                    $(".jp-item1 .jp-light2>img").addClass("animate-move-h")
-                    addCSS3Animate($(".jp-item1 .jp-info")).done(function () {
-                        addCSS3Animate($(".jp-item1 .jp-people")).done(function () {
-                            addCSS3Animate($(".jp-item1 .jp-zhu1")).done(function () {
-                                addCSS3Animate($(".jp-item2 .jp-kuang")).then(function () {
-                                    $(".jp-item2 .jp-light1>img").addClass("animate-move")
-                                    $(".jp-item2 .jp-light3>img").addClass("animate-move-v-2")
-                                    $(".jp-item2 .jp-light2>img").addClass("animate-move-h")
-                                    addCSS3Animate($(".jp-item2 .jp-info")).done(function () {
-                                        addCSS3Animate($(".jp-item2 .jp-people")).done(function () {
-                                            addCSS3Animate($(".jp-item2 .jp-zhu2")).done(function () {
-                                                return;
+                var dianInfo = [{"x":50.760009765625,"w":56},
+                    {"x":50.760009765625,"w":147},
+                    {"x":50.760009765625,"w":233},
+                    {"x":50.760009765625,"w":190},
+                    {"x":50.760009765625,"w":34},
+                    {"x":50.760009765625,"w":74},
+                    {"x":50.760009765625,"w":102},
+                    {"x":50.760009765625,"w":97},
+                    {"x":50.760009765625,"w":137},
+                    {"x":50.760009765625,"w":125},
+                    {"x":50.760009765625,"w":56},
+                    {"x":50.760009765625,"w":79},
+                    {"x":426.760009765625,"w":73}, {"x":426.760009765625,"w":110},{"x":426.760009765625,"w":162},{"x":426.760009765625,"w":124},{"x":426.760009765625,"w":149},{"x":426.760009765625,"w":142},{"x":426.760009765625,"w":105},{"x":426.760009765625,"w":97},{"x":426.760009765625,"w":51},{"x":426.760009765625,"w":42},{"x":426.760009765625,"w":47},{"x":426.760009765625,"w":79}]
+                 var $this = $(this);
+                var opts = {
+                    count: 10,//随机计数
+                    dtd: $.Deferred(),// 新建一个deferred对象
+                    c:$(this).find("canvas")[0],//画布
+                    ctx: $(this).find("canvas")[0].getContext("2d"),//画布
+                    canvasTimer: $this.data("lock", false),
+                    color:"#9b96ff",
+                    minR:2,
+                    maxR:6,
+                    shadowWidth:10
+                }
 
-                                                waitGoNextPage($this, $this.next(), 7000);
-                                            })
-                                        })
-                                    })
-                                })
+                $this.data("status") == "animating"
+                addCSS3Animate($(".jp-kuang")).then(function () {
+                    $(".jp-light1>img").addClass("animate-move")
+                    $(".jp-light3>img").addClass("animate-move-v-2")
+                    $(".jp-light2>img").addClass("animate-move-h")
+                    addCSS3Animate($(".jp-info")).done(function () {
+                        addCSS3Animate($(".jp-people")).done(function () {
+                            addCSS3Animate($(".jp-zhu2,.jp-zhu1")).done(function () {
+                                canvasAnimate3(opts,dianInfo)
+                                return;
+                                waitGoNextPage($this, $this.next(), 7000);
                             })
                         })
                     })
@@ -889,6 +1004,8 @@
             var $curpage = $(".page.current") || $(".page").eq(0);
 
             animateCountUp($curpage.find(".animateCountUp"))
+                $(".animate-rotate-one").removeClass("animate-rotate-one")
+            addCSS3Animate($curpage.find(".quan").addClass("animate-rotate-one"))
             if (!$curpage.data("ready")) {
                 loadpage($curpage, initBg);
             } else {
@@ -961,12 +1078,13 @@
         var vSwiper = new Swiper('.swiper-container', {
             speed: 1000,
             parallax: true,
-            initialSlide: 1,
+            initialSlide: 4,
+            // loop:true,
             nextButton: '.arrow-right',
             prevButton: '.arrow-left',
             paginationClickable: true,
             pagination: ".swiper-pagination",
-            onSlideChangeStart: function () {
+            onSlideChangeEnd: function () {
                 if (vSwiper) {
                     goNextPage($(".page").eq(vSwiper.previousIndex), $(".page").eq(vSwiper.activeIndex));
                 }
