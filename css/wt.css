@@ -6,9 +6,6 @@
 .wt-page .fristLetter .underline{
 	background: #00d4f9  ;
 }
-.pageAniGroup{
-	transform: scale(0.8)
-}
 .wt-page .pageAniGroup{
 	left: -21px;
 	top: -86px;
