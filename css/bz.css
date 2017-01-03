@@ -10,12 +10,23 @@
 	left: -18px;
 	top: -135px;
 }
-.bz-dunpai,.bz-flash,.bz-ditu,.bz-neiquan,.bz-dian,.bz-shaomiao{
+.bz-dunpai,.bz-flash,.bz-ditu,.bz-neiquan,.bz-dian,.bz-shaomiao,
+.bz-dian1,.bz-dian2,.bz-dian3,.bz-dian4,.bz-dian5,.bz-dian6,.bz-dian7{
 	position: absolute;
 	display: block;
 	left:px;
 	top:0px;
 }
+.bz-dian1,.bz-dian2,.bz-dian3,.bz-dian4,.bz-dian5,.bz-dian6,.bz-dian7{
+	background-size: 100% 100%;
+}
+.bz-dian1{left:164px;top:66px;width:10px;height:10px}
+.bz-dian2{left:298px;top:119px;width:40px;height:40px}
+.bz-dian3{left:392px;top:119px;width:10px;height:10px}
+.bz-dian4{left:364px;top:402px;width:25px;height:25px}
+.bz-dian5{left:287px;top:524px;width:10px;height:10px}
+.bz-dian6{left:64px;top:367px;width:40px;height:40px}
+.bz-dian7{left:68px;top:196px;width:30px;height:30px}
 .bz-dunpai,.bz-flash,.bz-neiquan{
 	width: 400px;
 	height: 400px;
@@ -42,7 +53,7 @@
 	opacity: 0;
 	*filter: alpha(opacity=0);
 }
-.bz-flash,.bz-dunpai{
+.bz-flash,.bz-dunpai,.bz-dian1,.bz-dian2,.bz-dian3,.bz-dian4,.bz-dian5,.bz-dian6,.bz-dian7{
 	transform: scale(0,0);
 }
 
@@ -57,7 +68,14 @@
 	*filter: alpha(opacity=100);
 }
 .bz-flash.animate-show,
-.bz-dunpai.animate-show{
+.bz-dunpai.animate-show,
+.bz-dian1.animate-show,
+.bz-dian2.animate-show,
+.bz-dian3.animate-show,
+.bz-dian4.animate-show,
+.bz-dian5.animate-show,
+.bz-dian6.animate-show,
+.bz-dian7.animate-show{
 	transform: scale(1,1);
 }
 /*s报障预警*/

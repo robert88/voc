@@ -16,7 +16,7 @@
     <script src="./js/main.js"></script>
     <script src="./js/getsize.js"></script>
     <script src="./js/countUp.js"></script>
-    <script src="./js/swiper.min.js"></script>
+    <script src="./js/swiper.js"></script>
     <!--<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>-->
     <style type="text/css">
         @font-face {font-family: 'webfont';
@@ -72,7 +72,7 @@
             width: 20%;
             float: left;
             clear: right;
-            font-size: 18px;
+            font-size: 1.125rem;
         }
 
         .wrap {
@@ -176,7 +176,7 @@
         }
         .page .fristLetter .underline{
             position: absolute;
-            width: 30px;
+            width: 2.8rem;
             height: 2px;
             left:0px;
             bottom:0px;
@@ -189,6 +189,7 @@
             text-align: center;
             font-size: 2rem;
             display: inline-block;
+            margin-bottom: 0.4rem;
         }
         .page .quan{
             background: url(./images/quan.png) no-repeat;
@@ -230,7 +231,8 @@
             bottom: 5rem;
         }
         .swiper-pagination-bullet {
-            border: 1px solid #fff;
+            border: 2px solid #fff;
+            opacity: 1;
             background: transparent;
         }
         .swiper-pagination-bullet-active {
@@ -267,10 +269,10 @@
     <div class="swiper-pagination"></div>
     <div class="swiper-wrapper">
     <!--s平台概况-->
-    <section class="page pt-page swiper-slide" data-bg="./images/pt/pt_bg.jpg"  style="background-image:url(./images/pt/pt_bg.jpg)">
+    <section class="page pt-page swiper-slide current" data-bg="./images/pt/pt_bg.jpg"  style="background-image:url(./images/pt/pt_bg.jpg)">
         <div class="wrap col">
         <div class="pageleft">
-            <a class="a-wrap" href="#">
+            <a class="a-wrap stopAutoPlay" href="#">
                 <h2 class="fristLetter webfont" data-swiper-parallax="-500"><i class="underline"></i>平台概况</h2>
                 <div class="info" data-swiper-parallax="-1500">
                     <p>消费者声音汇聚与分析平台，</p>
@@ -295,7 +297,7 @@
                         <span class="num animateCountUp" data-num="579">0</span>条
                     </span>
                 </p>    
-                <p>保障源声量</p>
+                <p>竞品源声量</p>
             </li>
         </ul>
         </div>
@@ -310,11 +312,26 @@
                 <div data-img="./images/pt/pt_line2.png" class="pt-line2"></div>
                 <div data-img="./images/pt/pt_line3.png" class="pt-line3"></div>
                 <div data-img="./images/pt/pt_line4.png" class="pt-line4"></div>
-                <div data-img="./images/pt/pt_dian2.png" class="pt-dian1"> <span class="pt-text">消费者的声音</span></div>
-                <div data-img="./images/pt/pt_dian1.png" class="pt-dian2"><span class="pt-text">危机</span></div>
-                <div data-img="./images/pt/pt_dian1.png" class="pt-dian3"><span class="pt-text">竞品</span></div>
-                <div data-img="./images/pt/pt_dian1.png" class="pt-dian4"><span class="pt-text">舆情</span></div>
-                <div data-img="./images/pt/pt_dian1.png" class="pt-dian5"><span class="pt-text">问题</span></div>
+                <div  class="pt-dian1" data-img="./images/pt/pt_dian2.png"> 
+                    <span class="dian" data-img="./images/pt/pt_dian3.png"></span>
+                    <span class="pt-text">消费者的声音</span>
+                </div>
+                <div data-img="./images/pt/pt_dian1.png" class="pt-dian2">
+                    <span class="dian" data-img="./images/pt/pt_dian4.png"></span>
+                    <span class="pt-text">危机</span>
+                </div>
+                <div data-img="./images/pt/pt_dian1.png" class="pt-dian3">
+                    <span class="dian" data-img="./images/pt/pt_dian4.png"></span>
+                    <span class="pt-text">报障</span>
+                </div>
+                <div data-img="./images/pt/pt_dian1.png" class="pt-dian4">
+                    <span class="dian" data-img="./images/pt/pt_dian4.png"></span>
+                    <span class="pt-text">舆情</span>
+                </div>
+                <div data-img="./images/pt/pt_dian1.png" class="pt-dian5">
+                    <span class="dian" data-img="./images/pt/pt_dian4.png"></span>
+                    <span class="pt-text">问题</span>
+                </div>
             </div>
         </div>
         </div>
@@ -326,7 +343,7 @@
     <section class="page yq-page swiper-slide" data-bg="./images/yq/yq_bg.jpg">
         <div class="wrap col">
         <div class="pageleft">
-            <a class="a-wrap" href="#">
+            <a class="a-wrap stopAutoPlay" href="#">
             <h2 class="fristLetter webfont" data-swiper-parallax="-500"><i class="underline"></i>舆情分析</h2>
             <div class="info" data-swiper-parallax="-1500">
                 <p>基于网络和大数据分析，通过热点问题和用户声音的统计分析，</p>
@@ -373,12 +390,14 @@
     <section class="page wt-page swiper-slide" data-bg="./images/wt/wt_bg.jpg">
         <div class="wrap col">
         <div class="pageleft">
+            <a class="a-wrap stopAutoPlay" href="#">
             <h2 class="fristLetter webfont" data-swiper-parallax="-500"> <i class="underline"></i>问题识别</h2>
             <div class="info" data-swiper-parallax="-1500">
                 <p>问题深度挖掘，定制提醒。</p>
                 <p>社交聆听，与客户零距离沟通。重视用户反馈的每一个问题，</p>
                 <p>为改进每一项用户体验做好充足准备。</p>
             </div>
+            </a>
             <ul class="toji col" data-swiper-parallax="-3500">
                 <li>
                     <p>
@@ -439,21 +458,31 @@
     <section class="page bz-page swiper-slide" data-bg="./images/bz/bz_bg.jpg">
         <div class="wrap col">
         <div class="pageleft">
+             <a class="a-wrap stopAutoPlay" href="#">
             <h2 class="fristLetter webfont" data-swiper-parallax="-500"><i class="underline"></i>报障预警</h2>
             <div class="info" data-swiper-parallax="-1500">
                 <p>实时监控危机事件，智能识别异常事件，及时通报、快速处理</p>
                 <p> 清晰的记录每一个处理详情，深度挖掘危机详情，</p>
                 <p> 详情危机发生背后的原因。</p>
             </div>
+            </a>
         </div>
         <div class="pageright">
             <div class="pageAniGroup" data-max-top="-20" data-min-top="-40">
                 <div data-img="./images/bz/bz_ditu.png" class="bz-ditu"></div>
                 <div data-img="./images/bz/bz_neiquan.png" class="bz-neiquan"></div>
+
                 <div data-img="./images/bz/bz_shaomiao.png" class="bz-shaomiao"></div>
                 <div data-img="./images/bz/bz_dunpai.png" class="bz-dunpai"></div>
                 <div data-img="./images/bz/bz_flash.png" class="bz-flash"></div>
                 <canvas class="bz-dian" width="720" height="588"></canvas>
+                <div data-img="./images/bz/bz_dian.png" class="bz-dian1 "></div>
+                <div data-img="./images/bz/bz_dian2.png" class="bz-dian2"></div>
+                <div data-img="./images/bz/bz_dian.png" class="bz-dian3"></div>
+                <div data-img="./images/bz/bz_dian2.png" class="bz-dian4"></div>
+                <div data-img="./images/bz/bz_dian.png" class="bz-dian5"></div>
+                <div data-img="./images/bz/bz_dian2.png" class="bz-dian6"></div>
+                <div data-img="./images/bz/bz_dian2.png" class="bz-dian7"></div>
             </div>
         </div>
         </div>
@@ -462,15 +491,17 @@
 
 
     <!--s竞品分析-->
-    <section class="page jp-page swiper-slide current" data-bg="./images/jp/jp_bg.jpg">
+    <section class="page jp-page swiper-slide" data-bg="./images/jp/jp_bg.jpg">
         <div class="wrap col">
         <div class="pageleft">
+            <a class="a-wrap stopAutoPlay" href="#">
             <h2 class="fristLetter webfont" data-swiper-parallax="-500"><i class="underline"></i>竞品分析</h2>
             <div class="info" data-swiper-parallax="-1500">
                 <p>用户视角，见微知著，帮你看清孰强孰弱。</p>
                 <p> 更全面的竞品对比，无论是产品整体还是产品细节。</p>
                 <p> 我们的优势，我们的劣势，我们改进的方向，一目了然。</p>
             </div>
+            </a>
         </div>
         <div class="pageright">
             <div class="pageAniGroup webfont" data-max-top="30" data-min-top="-40">
@@ -514,7 +545,7 @@
     <!--e竞品分析-->
     </div>
 </article>
-</div>
+
 <footer>
     <p>关于voc | 账户管理 | 帮助中心 | 联系我们</p>
     <p>版权所有华为技术有限公司</p>

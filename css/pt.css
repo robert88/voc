@@ -8,7 +8,14 @@
 .pt-page .pageAniGroup{
 	top: -140px;
 }
-.pt-quan1,.pt-quan2,.pt-quan3,.pt-quan4,.pt-ditu,.pt-line1,.pt-line2,.pt-line3,.pt-line4,.pt-dian1,.pt-dian2,.pt-dian3,.pt-dian4,.pt-dian5,.pt-text{
+.pt-quan1,.pt-quan2,.pt-quan3,.pt-quan4,.pt-ditu,.pt-line1,.pt-line2,.pt-line3,.pt-line4,
+.pt-dian1,
+.pt-dian1 .dian,
+.pt-dian2 .dian,
+.pt-dian3 .dian,
+.pt-dian4 .dian,
+.pt-dian5 .dian,
+.pt-dian2,.pt-dian3,.pt-dian4,.pt-dian5,.pt-text{
 	position: absolute;
 	display: block;
 	left:0px;
@@ -20,9 +27,16 @@
 	left: 115px;
 	top: 33px;
 }
-.pt-dian1,.pt-dian2,.pt-dian3,.pt-dian4,.pt-dian5{
+.pt-dian1,
+.pt-dian1 .dian,
+.pt-dian2 .dian,
+.pt-dian3 .dian,
+.pt-dian4 .dian,
+.pt-dian5 .dian,
+.pt-dian2,.pt-dian3,.pt-dian4,.pt-dian5{
 background-size:100% ;
 }
+
 .pt-text{
 	width: 140px;
 	font-size:18px;
@@ -43,10 +57,14 @@ background-size:100% ;
 .pt-dian5 .pt-text{
 	left:26px;top:-6px;
 }
-
 .pt-dian1{
 	top: 215px;
 	left: 497px;
+	width:40px;
+	height:40px;
+}
+.pt-dian1 .dian{
+	opacity: 0;
 	width:40px;
 	height:40px;
 }
@@ -56,9 +74,19 @@ background-size:100% ;
 	width:20px;
 	height:20px;
 }
+.pt-dian2 .dian{
+	opacity: 0;
+	width:20px;
+	height:20px;
+}
 .pt-dian3{
 	top: 275px;
 	left: 177px;
+	width:30px;
+	height:30px;
+}
+.pt-dian3 .dian{
+	opacity: 0;
 	width:30px;
 	height:30px;
 }
@@ -68,9 +96,19 @@ background-size:100% ;
 	width:16px;
 	height:16px;
 }
+.pt-dian4 .dian{
+	opacity: 0;
+	width:16px;
+	height:16px;
+}
 .pt-dian5{
 	top: 394px;
 	left: 387px;
+	width:24px;
+	height:24px;
+}
+.pt-dian5 .dian{
+	opacity: 0;
 	width:24px;
 	height:24px;
 }

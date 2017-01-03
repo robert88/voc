@@ -43,7 +43,7 @@
             str[0] = '@media screen and (min-height: {0}px)  {'.tpl(maxh);
         }
         var curh = (maxh || minh);
-        var remroot = getResize(800, 350, curh, 125, 75);
+        var remroot = getResize(maxHeight, minHeight, curh, 125, 75);
         var setH = curh / (remroot / 100 * 16);
 
         return str.join("").tpl(setH / 6, setH / 12, setH / 3, setH / 4, setH / 8);
@@ -61,83 +61,12 @@
         }
         return that;
     };
-    //
-    // function initStyle() {
-    //     var styleStr = [
-    //         /*顺时针旋转*/
-    //         ".animate-rotate{",
-    //             "{0}animation: rotate 8s linear infinite;",
-    //         "}",
-    //         "@{0}keyframes rotate{",
-    //             "0 %,100 % {",
-    //                 "{0}transform:rotate(0deg);",
-    //              "}",
-    //             "100 % {",
-    //                 "{0}transform:rotate(360deg);",
-    //             "}",
-    //         "}",
-    //             /*逆时针旋转*/
-    //         ".animate-rotate-rev{",
-    //             "{0}animation: rotate-rev 8s linear infinite;",
-    //         "}",
-    //
-    //         "@{0}keyframes rotate-rev{",
-    //             "0 %,100 % {",
-    //                 "{0}transform:rotate(360deg);",
-    //             "}",
-    //             "100 % {",
-    //                 "{0}transform:rotate(0deg);",
-    //             "}",
-    //         "}",
-    //             /*旋转一次*/
-    //         ".animate-rotate-noce{",
-    //             "{0}transform:rotate(360deg);",
-    //         "}",
-    //         /*水平移动*/
-    //         ".animate-move{",
-    //         "{0}animation: move 4s linear infinite;",
-    //         "}",
-    //         "@{0}keyframes move{",
-    //             "0%{{0}transform: translateX(-100px) scale(0,1);opacity: 0;}",
-    //             "50%{{0}transform: translateX(40px) scale(1,1);opacity: 1;}",
-    //             "100%{{0}transform: translateX(180px) scale(0,1);opacity: 0;}",
-    //         "}",
-    //         /*反方向水平移动*/
-    //         ".animate-move-v-2{",
-    //         "{0}animation: move-v-2 4s linear infinite;",
-    //         "}",
-    //         "@{0}keyframes move-v-2{",
-    //         "0%{{0}transform: translateX(180px) scale(0,1);opacity: 0;}",
-    //         "50%{{0}transform: translateX(40px) scale(1,1);opacity: 1;}",
-    //         "100%{{0}transform: translateX(-100px) scale(0,1);opacity: 0;}",
-    //         "}",
-    //         /*方向垂直移动*/
-    //         ".animate-move-h{",
-    //         "{0}animation: move-h 4s linear infinite;",
-    //         "}",
-    //         "@{0}keyframes move-h{",
-    //         "0%{{0}transform: translateY(-100px) scale(0,1);opacity: 0;}",
-    //         "50%{{0}transform:translateY(90px) scale(1,1);opacity: 1;}",
-    //         "100%{{0}transform:translateY(280px) scale(0,1);opacity: 0;}",
-    //         "}",
-    //
-    //     ]
-    //     var map = {
-    //             'O': '-o-',
-    //             'Moz': '-moz-',
-    //             'Webkit': '-webkit-',
-    //             'Ms': '-ms-',
-    //         }
-    //
-    //     $("head").append("<style>{0}</style>".tpl( styleStr.join("\n").tpl(map[CSS3FLAG]||"") ));
-    // }
-
 
     var preh;
 
     function changeRootrem() {
-        var h = getRagen($(window).height(), 1080, 500);
-        var remroot = getResize(800, 500, h, 100, 75)
+        var h = getRagen($(window).height(), maxHeight, minHeight);
+        var remroot = getResize(maxHeight, minHeight, h, 100, 75)
         if (preh == h) {
             return remroot;
         }
@@ -235,7 +164,7 @@
             var count = 0;
             g_cont++
             var def = {
-                duration: ".1s",
+                duration: ".2s",
                 property: "all",
                 timingFunction: "ease-in-out",
                 delay: ".1s",
@@ -351,6 +280,7 @@
         function initCanvasAnimate(romand, dianInfo, opts) {
 
             var len = rollUp(opts, romand.length);
+            // var len = romand.length
             if (romand.length == len && opts.status == "lineOk") {
                 opts.dtd.resolve(); // 改变deferred对象的执行状态
             }
@@ -469,6 +399,7 @@
         function initCanvasAnimate2(romand, dianInfo, opts) {
 
             var len = rollUp(opts, romand.length);
+            // var len = romand.length
             if (romand.length == len && !opts.end) {
                 opts.end = true
                 opts.dtd.resolve(); // 改变deferred对象的执行状态
@@ -486,7 +417,7 @@
                 return;
             }
             clearTimeout(opts.canvasTimer.data("timer"))
-            opts.canvasTimer.data("timer", setTimeout(initCanvasAnimate2, 40, romand, dianInfo, opts));
+            opts.canvasTimer.data("timer", setTimeout(initCanvasAnimate2, 80, romand, dianInfo, opts));
         }
 
         function initCanvasDian2(dian, dianInfo, opts) {
@@ -555,7 +486,7 @@
                 return;
             }
             clearTimeout(opts.canvasTimer.data("timer"))
-            opts.canvasTimer.data("timer", setTimeout(initCanvasAnimate3, 40,dianInfo, opts));
+            opts.canvasTimer.data("timer", setTimeout(initCanvasAnimate3, 50,dianInfo, opts));
         }
 
         function initCanvaskuang3(kuang, opts) {
@@ -582,11 +513,12 @@
                         $(".pt-quan1,.pt-quan3").addClass("animate-rotate");
                         $(".pt-quan2,.pt-quan4").addClass("animate-rotate-rev");
                         addCSS3Animate($(".pt-dian1")).done(function () {
+                            $(".pt-dian1 .dian").addClass("animate-opacity");
                             addCSS3Animate($(".pt-line1,.pt-line2,.pt-line3,.pt-line4")).done(function () {
                                 addCSS3Animate($(".pt-dian2,.pt-dian3,.pt-dian4,.pt-dian5")).done(function () {
+                                    $(".pt-dian2 .dian,.pt-dian3 .dian,.pt-dian4 .dian,.pt-dian5 .dian").addClass("animate-opacity");
                                     /*切换到下一页*/
-                                    return;
-                                    waitGoNextPage($this, $this.next(), 7000);
+                                    // waitGoNextPage($this, $this.next(), 7000);
                                 })
                             })
                         })
@@ -730,7 +662,7 @@
                 }, {"x": 334.33331298828125, "y": 374.03125, "index": 31, "lineTo": "30,10,29,7,8,27"}]
                 var $this = $(this);
                 var opts = {
-                    count: 0,//随机计数
+                    count: 10,//随机计数
                     dtd: $.Deferred(),// 新建一个deferred对象
                     c: $(".yq-dian")[0],//画布
                     ctx: $(".yq-dian")[0].getContext("2d"),//画布
@@ -746,9 +678,8 @@
                         $(".yq-quan2").addClass("animate-rotate-rev");
                         addCSS3Animate($(".yq-diqiu")).done(function () {
                             canvasAnimate(opts, dianInfo).done(function () {
-                                return;
                                 /*切换到下一页*/
-                                waitGoNextPage($this, $this.next(), 7000);
+                                // waitGoNextPage($this, $this.next(), 7000);
                             })
                         })
                     })
@@ -825,7 +756,7 @@
                     "index": 31
                 }, {"x": 254.33331298828125, "y": 254, "index": 32}]
                 var opts = {
-                    count: 10,//随机计数
+                    count: 0,//随机计数
                     dtd: $.Deferred(),// 新建一个deferred对象
                     c: $(".wt-dian")[0],//画布
                     ctx: $(".wt-dian")[0].getContext("2d"),//画布
@@ -848,8 +779,7 @@
                                                 addCSS3Animate($(".wt-renwu7")).done(function () {
                                                     addCSS3Animate($(".wt-renwu5")).then(function () {
                                                         addCSS3Animate($(".wt-renwu4")).done(function () {
-                                                            return;
-                                                            waitGoNextPage($this, $this.next(), 7000);
+                                                            // waitGoNextPage($this, $this.next(), 7000);
                                                         })
                                                     })
                                                 })
@@ -872,7 +802,7 @@
                 }
                 var $this = $(this);
                 var opts = {
-                    count: 10,//随机计数
+                    count: 0,//随机计数
                     dtd: $.Deferred(),// 新建一个deferred对象
                     c:$(this).find("canvas")[0],//画布
                     ctx: $(this).find("canvas")[0].getContext("2d"),//画布
@@ -886,13 +816,34 @@
                 $this.data("status") == "animating"
                 addCSS3Animate($(".bz-ditu")).done(function () {
                     canvasAnimate2(opts, dianInfo).done(function () {})
-                    addCSS3Animate($(".bz-neiquan,.bz-shaomiao")).done(function () {
+                    addCSS3Animate($(".bz-shaomiao")).done(function () {
                         // $(".bz-neiquan").addClass("animate-rotate-rev");
                         $(".bz-shaomiao").addClass("animate-rotate");
                         addCSS3Animate($(".bz-dunpai")).done(function () {
                             addCSS3Animate($(".bz-flash"), {timingFunction: "cubic-bezier(.47,-0.05,.69,1.69)"}).done(function () {
-                                return;
-                                waitGoNextPage($this, $this.next(), 7000);
+                                // waitGoNextPage($this, $this.next(), 7000);
+                            })
+                        })
+                        var dur = {duration: ".3s"}
+                        addCSS3Animate($(".bz-dian4"),{delay: ".6s"}).done(function () {
+                            $(".bz-dian4").addClass("animate-shake")
+                            addCSS3Animate($(".bz-dian5"),{delay: ".6s"}).done(function () {
+                               $(".bz-dian5").addClass("animate-shake")
+                                addCSS3Animate($(".bz-dian6"),{delay: ".6s"}).done(function () {
+                                    $(".bz-dian6").addClass("animate-shake")
+                                    addCSS3Animate($(".bz-dian7"),{delay: ".6s"}).done(function () {
+                                        $(".bz-dian7").addClass("animate-shake")
+                                        addCSS3Animate($(".bz-dian1"),{delay: ".3s"}).done(function () {
+                                            $(".bz-dian1").addClass("animate-shake")
+                                            addCSS3Animate($(".bz-dian2"),{delay: ".3s"}).done(function () {
+                                                $(".bz-dian2").addClass("animate-shake")
+                                                addCSS3Animate($(".bz-dian3"),{delay: ".3s"}).done(function () {
+                                                    $(".bz-dian3").addClass("animate-shake")
+                                                })
+                                            })
+                                        })
+                                    })
+                                })
                             })
                         })
                     })
@@ -916,7 +867,7 @@
                     {"x":426.760009765625,"w":73}, {"x":426.760009765625,"w":110},{"x":426.760009765625,"w":162},{"x":426.760009765625,"w":124},{"x":426.760009765625,"w":149},{"x":426.760009765625,"w":142},{"x":426.760009765625,"w":105},{"x":426.760009765625,"w":97},{"x":426.760009765625,"w":51},{"x":426.760009765625,"w":42},{"x":426.760009765625,"w":47},{"x":426.760009765625,"w":79}]
                  var $this = $(this);
                 var opts = {
-                    count: 10,//随机计数
+                    count: 0,//随机计数
                     dtd: $.Deferred(),// 新建一个deferred对象
                     c:$(this).find("canvas")[0],//画布
                     ctx: $(this).find("canvas")[0].getContext("2d"),//画布
@@ -936,8 +887,7 @@
                         addCSS3Animate($(".jp-people")).done(function () {
                             addCSS3Animate($(".jp-zhu2,.jp-zhu1")).done(function () {
                                 canvasAnimate3(opts,dianInfo)
-                                return;
-                                waitGoNextPage($this, $this.next(), 7000);
+                                // waitGoNextPage($this, $this.next(), 7000);
                             })
                         })
                     })
@@ -945,20 +895,23 @@
             })
         }
 
-        function clearPage($curpage) {
-            $curpage.data("lock", true);
-            clearTimeout($curpage.data("timer2"));
-            clearTimeout($curpage.data("timer"));
-            var canvas = $curpage.find("canvas");
-            if (canvas.length) {
-                canvas[0].width = canvas[0].width;
-            }
-            $curpage.find(".animate-show").off(css3AnimateEndEvent).removeClass("animate-show");
+        function clearPage() {
+
+            $(".animate-show").off(css3AnimateEndEvent).removeClass("animate-show");
             $(".animate-rotate").removeClass("animate-rotate")
+            $(".animate-shake").removeClass("animate-shake")
             $(".animate-rotate-rev").removeClass("animate-rotate-rev")
             $(".animate-move").removeClass("animate-move")
             $(".animate-move-v-2").removeClass("animate-move-v-2")
             $(".animate-move-h").removeClass("animate-move-h")
+            $(".animate-opacity").removeClass("animate-move-h")
+
+            $(".page").data("lock", true).data("lockAutoNext",false).removeClass("current");
+            clearTimeout( $(".page").data("timer2"));
+            clearTimeout( $(".page").data("timer"));
+            var canvas =  $(".page").find("canvas").each(function () {
+                this.width = this.width;
+            });
         }
 
         function goNextPage($curpage, $nextpage, time, callback) {
@@ -991,6 +944,9 @@
         function waitGoNextPage($curpage, $nextpage, time, callback) {
             clearTimeout($curpage.data("timer2"));
             $curpage.data("timer2", setTimeout(function () {
+                if($(".page").data("lockAutoNext")){
+                    return;
+                }
                 if (vSwiper.activeIndex == 4) {
                     vSwiper._slideTo(0)
                 } else {
@@ -1001,7 +957,18 @@
 
         /*初始化页面*/
         function initpage(initBg) {
-            var $curpage = $(".page.current") || $(".page").eq(0);
+            var $curpage = $(".page.current").length==0? $(".page").eq(0):$(".page.current");
+            var index = $curpage.index();
+            // if(index==0){
+            //     $(".arrow-left").css("cursor","not-allowed")
+            // }else{
+            //     $(".arrow-left").css("cursor","pointer")
+            // }
+            // if(index==($(".page").length-1)){
+            //     $(".arrow-right").css("cursor","not-allowed")
+            // }else{
+            //     $(".arrow-right").css("cursor","pointer")
+            // }
 
             animateCountUp($curpage.find(".animateCountUp"))
                 $(".animate-rotate-one").removeClass("animate-rotate-one")
@@ -1074,25 +1041,35 @@
                 loadimg($curpage, imgArr[i].$target, imgArr[i].src, deepObj, len, initBg);
             }
         }
+        var perSildeIndex;
+        var slideFlag;
 
         var vSwiper = new Swiper('.swiper-container', {
             speed: 1000,
             parallax: true,
-            initialSlide: 4,
+            // initialSlide: 3,
             // loop:true,
-            nextButton: '.arrow-right',
-            prevButton: '.arrow-left',
+            // simulateTouch:false,
+            // nextButton: '.arrow-right',
+            // prevButton: '.arrow-left',
             paginationClickable: true,
             pagination: ".swiper-pagination",
-            onSlideChangeEnd: function () {
+            autoplay:7000,
+            onTransitionEnd: function () {
                 if (vSwiper) {
-                    goNextPage($(".page").eq(vSwiper.previousIndex), $(".page").eq(vSwiper.activeIndex));
+                    if(vSwiper.activeIndex!=perSildeIndex){
+                        slideFlag=false;
+                        perSildeIndex = perSildeIndex||$(".page.current").index()||0;
+                        $(".page").data("lockAutoNext",true)
+                        goNextPage($(".page").eq(perSildeIndex), $(".page").eq(vSwiper.activeIndex));
+                        perSildeIndex = vSwiper.activeIndex;
+                    }
+
                 }
             }
         })
 
         function initAllbg() {
-            console.log("page1")
             $(".page").each(function (idx) {
                 var src = $(this).data("bg")
                 if (idx > 0) {
@@ -1101,7 +1078,38 @@
             })
         }
 
-        initpage(initAllbg);
+        $(".arrow-left").click(function () {
+            if(slideFlag){
+                return false;
+            }
+            slideFlag = true;
+            if(vSwiper.activeIndex<=0){
+                vSwiper.slideTo(4);
+            }else{
+                vSwiper.slideTo(vSwiper.activeIndex-1);
+            }
+            return false;
+        })
+
+        $(".arrow-right").click(function () {
+            if(slideFlag){
+                return false;
+            }
+            slideFlag = true;
+            if(vSwiper.activeIndex>=4){
+                vSwiper.slideTo(0);
+            }else{
+                vSwiper.slideTo(vSwiper.activeIndex+1);
+            }
+        })
+        // console.log(vSwiper)
+        $(".stopAutoPlay").hover(function(){
+            vSwiper.stopAutoplay();
+        },function(){
+            vSwiper.startAutoplay();
+        })
         initPageEvent()
+        initpage(initAllbg);
+
     })
 })();
