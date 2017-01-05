@@ -15,7 +15,7 @@
 .pt-dian3 .dian,
 .pt-dian4 .dian,
 .pt-dian5 .dian,
-.pt-dian2,.pt-dian3,.pt-dian4,.pt-dian5,.pt-text{
+.pt-dian2,.pt-dian3,.pt-dian4,.pt-dian5,.pt-text,.pt-canvas{
 	position: absolute;
 	display: block;
 	left:0px;
@@ -143,6 +143,10 @@ background-size:100% ;
 .pt-ditu{
 	width: 702px;
 	height: 392px;
+	top: 135px;
+	left: 19px;
+}
+.pt-canvas{
 	top: 135px;
 	left: 19px;
 }

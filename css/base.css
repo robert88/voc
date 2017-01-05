@@ -146,16 +146,28 @@ a.a-wrap{
 .z4 {
 	z-index: 4;
 }
-
-.animate-ease{
-	-webkit-transform: translateZ(0);
-	-moz-transform: translateZ(0);
-	-ms-transform: translateZ(0);
-	-o-transform: translateZ(0);
-	transform: translateZ(0);
+.animate-ease,
+.animate-rotate-one,
+.animate-rotate,
+.animate-rotate-rev,
+.animate-rotate-rev-slow,
+.animate-rotate-slow,
+.animate-move,
+.animate-move-v-2,
+.animate-move-h,
+.animate-shake,
+.animate-opacity{
+	-webkit-transform: translateZ(0) rotateZ(360deg);
+	-moz-transform: translateZ(0) rotateZ(360deg);
+	-ms-transform: translateZ(0) rotateZ(360deg);
+	-o-transform: translateZ(0) rotateZ(360deg);
+	transform: translateZ(0) rotateZ(360deg);
 	backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
 	-webkit-backface-visibility: hidden;
+}
+
+.animate-ease{
 	-webkit-transition-delay: .1s;
 	-o-transition-delay: .1s;
 	transition-delay: .1s;
@@ -164,50 +176,46 @@ a.a-wrap{
 	-webkit-transition: all .2s ease-in-out;
 	transition: all .2s ease-in-out;
 }
+
+
 .animate-rotate-one{
-	-webkit-transform: translateZ(0);
-	-moz-transform: translateZ(0);
-	-ms-transform: translateZ(0);
-	-o-transform: translateZ(0);
-	transform: translateZ(0);
-	backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
-	-webkit-backface-visibility: hidden;
 	-moz-animation: rotate 1s linear;
 	-webkit-animation: rotate 1s linear;
 	-o-animation: rotate 1s linear;
 	-ms-animation: rotate 1s linear;
 	animation: rotate 1s linear;
 }
+
 .animate-rotate{
-	-webkit-transform: translateZ(0);
-	-moz-transform: translateZ(0);
-	-ms-transform: translateZ(0);
-	-o-transform: translateZ(0);
-	transform: translateZ(0);
-	backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
-	-webkit-backface-visibility: hidden;
 	-moz-animation: rotate 5s linear infinite;
 	-webkit-animation: rotate 5s linear infinite;
 	-o-animation: rotate 5s linear infinite;
 	-ms-animation: rotate 5s linear infinite;
 	animation: rotate 5s linear infinite;
 }
+
 .animate-rotate-rev{
-	-webkit-transform: translateZ(0);
-	-moz-transform: translateZ(0);
-	-ms-transform: translateZ(0);
-	-o-transform: translateZ(0);
-	transform: translateZ(0);
-	backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
-	-webkit-backface-visibility: hidden;
 	-moz-animation: rotate-rev 5s linear infinite;
 	-webkit-animation: rotate-rev 5s linear infinite;
 	-o-animation: rotate-rev 5s linear infinite;
 	-ms-animation: rotate-rev 5s linear infinite;
 	animation: rotate-rev 5s linear infinite;
+}
+
+.animate-rotate-rev-slow{
+	-moz-animation: rotate-rev 20s linear infinite;
+	-webkit-animation: rotate-rev 20s linear infinite;
+	-o-animation: rotate-rev 20s linear infinite;
+	-ms-animation: rotate-rev 20s linear infinite;
+	animation: rotate-rev 20s linear infinite;
+}
+
+.animate-rotate-slow{
+	-moz-animation: rotate 20s linear infinite;
+	-webkit-animation: rotate 20s linear infinite;
+	-o-animation: rotate 20s linear infinite;
+	-ms-animation: rotate 20s linear infinite;
+	animation: rotate 20s linear infinite;
 }
 @-webkit-keyframes rotate {
 	0%,
@@ -291,14 +299,6 @@ a.a-wrap{
 	}
 }
 .animate-move{
-	-webkit-transform: translateZ(0);
-	-moz-transform: translateZ(0);
-	-ms-transform: translateZ(0);
-	-o-transform: translateZ(0);
-	transform: translateZ(0);
-	backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
-	-webkit-backface-visibility: hidden;
 	-moz-animation: move 4s linear infinite;
 	-webkit-animation: move 4s linear infinite;
 	-o-animation: move 4s linear infinite;
@@ -376,14 +376,6 @@ a.a-wrap{
 	}
 }
 .animate-move-v-2{
-	-webkit-transform: translateZ(0);
-	-moz-transform: translateZ(0);
-	-ms-transform: translateZ(0);
-	-o-transform: translateZ(0);
-	transform: translateZ(0);
-	backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
-	-webkit-backface-visibility: hidden;
 	-moz-animation: move-v-2 4s linear infinite;
 	-webkit-animation: move-v-2 4s linear infinite;
 	-o-animation: move-v-2 4s linear infinite;
@@ -461,14 +453,6 @@ a.a-wrap{
 	}
 }
 .animate-move-h{
-	-webkit-transform: translateZ(0);
-	-moz-transform: translateZ(0);
-	-ms-transform: translateZ(0);
-	-o-transform: translateZ(0);
-	transform: translateZ(0);
-	backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
-	-webkit-backface-visibility: hidden;
 	-moz-animation: move-h 4s linear infinite;
 	-webkit-animation: move-h 4s linear infinite;
 	-o-animation: move-h 4s linear infinite;
@@ -547,15 +531,7 @@ a.a-wrap{
 }
 /*呼吸灯*/
 .animate-opacity{
-	-webkit-transform: translateZ(0);
-	-moz-transform: translateZ(0);
-	-ms-transform: translateZ(0);
-	-o-transform: translateZ(0);
-	transform: translateZ(0);
 	transform: scale(.5,0.5);
-	backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
-	-webkit-backface-visibility: hidden;
 	-moz-animation: opacity 3s linear infinite;
 	-webkit-animation: opacity 3s linear infinite;
 	-o-animation: opacity 3s linear infinite;
@@ -635,15 +611,7 @@ a.a-wrap{
 
 /*抖动效果*/
 .animate-shake{
-	-webkit-transform: translateZ(0);
-	-moz-transform: translateZ(0);
-	-ms-transform: translateZ(0);
-	-o-transform: translateZ(0);
-	transform: translateZ(0);
 	transform: scale(1,1);
-	backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
-	-webkit-backface-visibility: hidden;
 	-moz-animation: shake 10s cubic-bezier(.67,-0.42,.13,1.64) infinite;
 	-webkit-animation: shake 10s cubic-bezier(.67,-0.42,.13,1.64) infinite;
 	-o-animation: shake 10s cubic-bezier(.67,-0.42,.13,1.64) infinite;
