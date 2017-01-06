@@ -311,7 +311,7 @@
             // prevButton: '.arrow-left',
             paginationClickable: true,
             pagination: ".swiper-pagination",
-            // autoplay:7000,
+            autoplay:7000,
             onTransitionEnd: function () {
                 if (vSwiper) {
                     if(vSwiper.activeIndex!=perSildeIndex){
@@ -361,9 +361,9 @@
         })
         // console.log(vSwiper)
         $(".stopAutoPlay").hover(function(){
-            // vSwiper.stopAutoplay();
+            vSwiper.stopAutoplay();
         },function(){
-            // vSwiper.startAutoplay();
+            vSwiper.startAutoplay();
         })
         // initPageEvent()
         initpage(initAllbg);
