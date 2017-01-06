@@ -63,13 +63,13 @@ var drag =function(seletor){
     }
 }
 var infoData=[];
+var curInfo
 
 var getInfo =function(seletor){
     var c = $(seletor)[0];
     var ctx = c.getContext("2d");
     var x,y,flag
     var left,top;
-    var curInfo;
     $(seletor).on("mousedown",function (e) {
 
         curInfo = {

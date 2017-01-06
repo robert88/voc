@@ -14,7 +14,7 @@
 	/*width: 801px;*/
 	/*height: 570px;*/
 }
-.yq-quan1,.yq-quan2,.yq-diqiu,.yq-dian{
+.yq-quan1,.yq-quan2,.yq-diqiu{
 	position: absolute;
 	display: block;
 	width: 610px;
@@ -22,7 +22,13 @@
 	left:0px;
 	top:-70px;
 }
-/*.yq-dian{border:1px solid red;}*/
+.yq-canvas{
+	 position: absolute;
+	 display: block;
+	 left:-30px;
+	 top:-100px;
+ }
+/*.yq-canvas{border:1px solid red;}*/
 /*动画之前*/
 .yq-quan1{
 	opacity:0.5;

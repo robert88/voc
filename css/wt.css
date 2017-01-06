@@ -10,7 +10,7 @@
 	left: -21px;
 	top: -86px;
 }
-.wt-ditu,.wt-dian,.wt-liubian,.wt-liubian-light,.wt-liubian-hui,.wt-renwu,.wt-renwu1,.wt-renwu2,.wt-renwu3,.wt-renwu4,.wt-renwu5,.wt-renwu6,.wt-renwu7,.wt-renwu8{
+.wt-ditu,.wt-canvas,.wt-liubian,.wt-liubian-light,.wt-liubian-hui,.wt-renwu,.wt-renwu1,.wt-renwu2,.wt-renwu3,.wt-renwu4,.wt-renwu5,.wt-renwu6,.wt-renwu7,.wt-renwu8{
 	position: absolute;
 	display: block;
 	/*opacity: 0;*/
@@ -29,7 +29,7 @@
 	width: 45px;
 	height: 85px;
 }
-.wt-ditu,.wt-dian,.wt-liubian,.wt-liubian-light,.wt-liubian-hui,.wt-renwu{
+.wt-ditu,.wt-canvas,.wt-liubian,.wt-liubian-light,.wt-liubian-hui,.wt-renwu{
 	width: 727px;
 	height: 413px;
 }
@@ -41,7 +41,7 @@
 .wt-renwu6{left:294px;top:306px;}
 .wt-renwu7{left:443px;top:309px;}
 .wt-renwu8{left:604px;top:214px;}
-.wt-dian{
+.wt-canvas{
 	opacity: 1;
 	*filter: alpha(opacity=100);
 }

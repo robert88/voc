@@ -12,7 +12,13 @@
     <link rel="stylesheet" type="text/css" href="./css/bz.css"/>
     <link rel="stylesheet" type="text/css" href="./css/swiper.min.css"/>
     <script src="./js/jquery-1.11.3.min.js"></script>
-    <!--script src="./js/easing.js"></script-->
+    <script src="./js/canvasAnimate.js"></script>
+    <script src="./js/css3Animate.js"></script>
+    <script src="./js/pt.js"></script>
+    <script src="./js/yq.js"></script>
+    <script src="./js/jp.js"></script>
+    <script src="./js/wt.js"></script>
+    <script src="./js/bz.js"></script>
     <script src="./js/main.js"></script>
     <script src="./js/getsize.js"></script>
     <script src="./js/countUp.js"></script>
@@ -304,11 +310,12 @@
         <div class="pageright">
             <div class="pageAniGroup" data-max-top="-10" data-min-top="-102">
                 <div data-img="./images/pt/pt_ditu.png" class="pt-ditu"></div>
-                <!-- <div data-img="./images/pt/pt_quan1.png" class="pt-quan1"></div> -->
-                <!-- <div data-img="./images/pt/pt_quan2.png" class="pt-quan2"></div> -->
-                <!-- <div data-img="./images/pt/pt_quan3.png" class="pt-quan3"></div> -->
-                <!-- <div data-img="./images/pt/pt_quan4.png" class="pt-quan4"></div> -->
-                <!-- <div data-img="./images/pt/gif1.gif" class="pt-quan4"></div> -->
+
+                 <div data-img="./images/pt/pt_quan1.png" class="pt-quan1" style="display: none"></div>
+                 <div data-img="./images/pt/pt_quan2.png" class="pt-quan2" style="display: none"></div>
+                 <div data-img="./images/pt/pt_quan3.png" class="pt-quan3" style="display: none"></div>
+                 <div data-img="./images/pt/pt_quan4.png" class="pt-quan4" style="display: none"></div>
+
                 <div data-img="./images/pt/pt_line1.png" class="pt-line1"></div>
                 <div data-img="./images/pt/pt_line2.png" class="pt-line2"></div>
                 <div data-img="./images/pt/pt_line3.png" class="pt-line3"></div>
@@ -333,7 +340,8 @@
                     <!-- <span class="dian" data-img="./images/pt/pt_dian4.png"></span> -->
                     <span class="pt-text">问题</span>
                 </div>
-                <canvas class="pt-canvas" width="702" height="392"></canvas>
+                <canvas class="pt-canvas" width="702" height="520"></canvas>
+                <canvas class="pt-canvas" width="702" height="520"></canvas>
             </div>
         </div>
         </div>
@@ -377,9 +385,9 @@
         <div class="pageright">
             <div class="pageAniGroup" data-max-top="40" data-min-top="0">
                 <div data-img="./images/yq/yq_diqiu.png" class="yq-diqiu"></div>
-                <div data-img="./images/yq/yq_quan1.png" class="yq-quan1"></div>
-                <div data-img="./images/yq/yq_quan2.png" class="yq-quan2"></div>
-                <canvas class="yq-dian" width="610" height="610"></canvas>
+                <div data-img="./images/yq/yq_quan1.png" class="yq-quan1"  style="display:none;"></div>
+                <div data-img="./images/yq/yq_quan2.png" class="yq-quan2" style="display:none;"></div>
+                <canvas class="yq-canvas" width="680" height="680"></canvas>
             </div>
         </div>
         </div>
@@ -439,7 +447,7 @@
                 <div data-img="./images/wt/wt_liubian_light.png" class="wt-liubian-light"></div>
                 <!--<div data-img="./images/wt/wt_liubian.png" class="wt-liubian"></div>-->
                 <!--<div data-img="./images/wt/wt_dian.png" class="wt-dian"></div>-->
-                <canvas width="727" height="413" class="wt-dian"></canvas>
+                <canvas width="727" height="413" class="wt-canvas"></canvas>
                 <!--<div data-img="./images/wt/wt_renwu.png" class="wt-renwu"></div>-->
                 <div data-img="./images/wt/wt_renwu1.png" class="wt-renwu1"></div>
                 <div data-img="./images/wt/wt_renwu2.png" class="wt-renwu2"></div>
@@ -475,10 +483,10 @@
                 <div data-img="./images/bz/bz_ditu.png" class="bz-ditu"></div>
                 <div data-img="./images/bz/bz_neiquan.png" class="bz-neiquan"></div>
 
-                <div data-img="./images/bz/bz_shaomiao.png" class="bz-shaomiao"></div>
+                <div data-img="./images/bz/bz_shaomiao.png" class="bz-shaomiao" style="display: none"></div>
                 <div data-img="./images/bz/bz_dunpai.png" class="bz-dunpai"></div>
                 <div data-img="./images/bz/bz_flash.png" class="bz-flash"></div>
-                <canvas class="bz-dian" width="720" height="588"></canvas>
+                <canvas class="bz-canvas" width="720" height="588"></canvas>
                 <div data-img="./images/bz/bz_dian.png" class="bz-dian1 "></div>
                 <div data-img="./images/bz/bz_dian2.png" class="bz-dian2"></div>
                 <div data-img="./images/bz/bz_dian.png" class="bz-dian3"></div>
@@ -540,7 +548,7 @@
                     <div data-img="./images/jp/jp_people.png" class="jp-people"></div>
                     <div data-img="./images/jp/jp_zhu.png" class="jp-zhu2"></div>
                 </div>
-                <canvas class="jp-zhu" width="610" height="310"></canvas>
+                <canvas class="jp-canvas" width="610" height="310"></canvas>
             </div>
         </div>
         </div>
