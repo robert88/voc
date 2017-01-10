@@ -11,7 +11,7 @@ $(function () {
             var canvasAnimate = new CanvasAnimate({c: $(".bz-canvas")[0]});
             $this.data("animate",canvasAnimate);
             canvasAnimate.pushAnimate(new Object2d({
-                data: [{"x":369,"y":32},{"x":381,"y":21},{"x":454,"y":52},{"x":517,"y":53},{"x":530,"y":89},{"x":512,"y":113},{"x":559,"y":123},{"x":618,"y":158},{"x":521,"y":166},{"x":584,"y":196},{"x":636,"y":206},{"x":525,"y":253},{"x":481,"y":298},{"x":500,"y":361},{"x":597,"y":372},{"x":608,"y":474},{"x":715,"y":534},{"x":648,"y":583},{"x":518,"y":538},{"x":527,"y":517}],
+                data: [{"x":369,"y":32,color:"#40d3e5"},{"x":381,"y":21,color:"#40d3e5"},{"x":454,"y":52,color:"#40d3e5"},{"x":517,"y":53},{"x":530,"y":89},{"x":512,"y":113},{"x":559,"y":123},{"x":618,"y":158},{"x":521,"y":166},{"x":584,"y":196},{"x":636,"y":206},{"x":525,"y":253},{"x":481,"y":298},{"x":500,"y":361},{"x":597,"y":372},{"x":608,"y":474},{"x":715,"y":534},{"x":648,"y":583},{"x":518,"y":538},{"x":527,"y":517}],
                 render: function (canvasObj) {
                     //原始长度
                     var orgLen = this.opts.data.length;
@@ -35,15 +35,16 @@ $(function () {
                     var drawData = this.drawData;
                     var len = drawData.length;
 
-                    //100ms一次来画点
-                    canvasObj.ctx.shadowColor = "rgb(127,184,203)";
-                    canvasObj.ctx.shadowOffsetX = 0;
-                    canvasObj.ctx.shadowOffsetY = 0;
-                    canvasObj.ctx.shadowBlur = 10;
-                    canvasObj.ctx.fillStyle = "rgb(127,184,203)";
+
 
                     for (var i = 0; i < len; i++) {
-                        drawData[i].flashTimer =  drawData[i].flashTimer||new AnimateCounter({start:2,end:6,rockback: true})
+                                            //100ms一次来画点
+                        canvasObj.ctx.shadowColor = drawData[i].color||"rgb(127,184,203)";
+                        canvasObj.ctx.shadowOffsetX = 0;
+                        canvasObj.ctx.shadowOffsetY = 0;
+                        canvasObj.ctx.shadowBlur = 10;
+                        canvasObj.ctx.fillStyle = drawData[i].color||"rgb(127,184,203)";
+                        drawData[i].flashTimer =  drawData[i].flashTimer||new AnimateCounter({start:4,end:6,rockback: true})
                         canvasObj.drawGroupDian(drawData[i], drawData[i].flashTimer )
                     }
 
@@ -111,9 +112,9 @@ $(function () {
 
                 //5、扫描出来的点
                 var dur = {duration: ".3s"}
-                addCSS3Animate($(".bz-dian4"),{delay: ".6s"}).done(function () {
+                addCSS3Animate($(".bz-dian4"),{delay: ".1s"}).done(function () {
                     $(".bz-dian4").addClass("animate-shake")
-                    addCSS3Animate($(".bz-dian5"),{delay: ".6s"}).done(function () {
+                    addCSS3Animate($(".bz-dian5"),{delay: ".8s"}).done(function () {
                         $(".bz-dian5").addClass("animate-shake")
                         addCSS3Animate($(".bz-dian6"),{delay: ".6s"}).done(function () {
                             $(".bz-dian6").addClass("animate-shake")

@@ -311,7 +311,7 @@
             // prevButton: '.arrow-left',
             paginationClickable: true,
             pagination: ".swiper-pagination",
-            autoplay:7000,
+            autoplay:6000,
             onTransitionEnd: function () {
                 if (vSwiper) {
                     if(vSwiper.activeIndex!=perSildeIndex){
