@@ -35,7 +35,7 @@ $(function () {
                                 end: copyData.end,
                                 loop: true,
                                 animateType: "linear",
-                                duration: 9000
+                                duration: 11000
                             });
                         canvasObj.rotate(copyData.rotateAnimate, {
                             x: copyData.x,

@@ -12,6 +12,7 @@
         paddingTop: 0,
         paddingLeft: 0,
         curIndex: 0,
+        paginationText:false,
         items_per_page:10,
         num_display_entries:2,
 
@@ -22,7 +23,7 @@
         switchType: "slide",
         autoPlayTime: 5000,
         dir: "left",
-
+        fixArrow:true,
         changeCallBack: null
     };
 
@@ -60,6 +61,18 @@
 
         $.extend(this, option);
 
+
+        this.fixPosition();
+
+        this.updatePageFooter();
+
+        if (this.autoPlay) {
+            this.start();
+        }
+    };
+
+    Carousel.prototype.fixPosition=function(){
+
         this.itemHeight = this.height;
 
         this.itemWidth = this.width;
@@ -75,22 +88,134 @@
         if (this.switchType == "slide") {
             this.fixSlideItem();
         }
-        this.fixNext();
-        this.fixPrev();
+        if(this.fixArrow){
+            this.fixNext();
+            this.fixPrev();
+        }
+
 
         this.fixWrap();
+    }
 
-        this.updatePageFooter();
-
-        if (this.autoPlay) {
-            this.start();
+    /*分页器*/
+    Carousel.prototype.setPageFooter = function (m, d, z, a, k, n) {
+        function w(c) {
+            return Math.floor(c) || 0
         }
+
+        function y(c) {
+            return Math.ceil(c) || 0
+        }
+
+        function q(c, f) {
+            f = parseInt(f, 10) || 0;
+            return parseInt(c, 10) || f
+        }
+
+        for (var t = 1; t < arguments.length; t++) {
+            if (t != 3) {
+                arguments[t] = q(arguments[t], 1)
+            }
+        }
+        if (d < 2) {
+            return m.html("")
+        }
+        if (z > d) {
+            z = d
+        }
+        var h = k || 2;
+        var b = n || 10;
+        var v = w(b / 2);
+        (h > v) && (h = v);
+        var l = h + 1;
+        var g = b - h * 2;
+        var u = [];
+        if (d <= b) {
+            b = d;
+            for (var t = 0; t < b; t++) {
+                u.push(t + 1)
+            }
+        } else {
+            if (z > v) {
+                u[h] = "...";
+                g--;
+                l = z - w(g / 2)
+            }
+            if ((d - z) > v) {
+                u[b - h - 1] = "..."
+            } else {
+                l = d - g - h + 1
+            }
+            if (l < h + 1) {
+                l = h + 1
+            }
+            for (var t = 0, s = 0; t < b; t++) {
+                if (!u[t]) {
+                    if (t < h) {
+                        u[t] = t + 1
+                    } else {
+                        if (t < b - h) {
+                            u[t] = l + s;
+                            s++
+                        } else {
+                            u[t] = d + 1 + t - b
+                        }
+                    }
+                }
+            }
+        }
+        var o = z - 1;
+        var r = z + 1;
+        o = o > 0 ? o : 1;
+        r = r < d ? r : d;
+        var x = ["<span>&nbsp;</span>"];
+        if (z == 1) {
+            x.push('<a href="' + o + '" class="pageMove tMuted" style="cursor:not-allow">&lt;</a>')
+        } else {
+            x.push('<a href="' + o + '" class="pageMove">&lt;</a>')
+        }
+        for (var t = 0; t < u.length; t++) {
+            if (u[t] == "...") {
+                x.push("<span >" + u[t] + "</span>")
+            } else {
+                if (u[t] == z) {
+                    if(this.paginationText){
+                        x.push('<a class="active" href="' + u[t] + '">' + u[t] + "</a>")
+                    }else{
+                        x.push('<a class="active" href="' + u[t] + '">' + "</a>")
+                    }
+                } else {
+                    if(this.paginationText){
+                        x.push('<a href="' + u[t] + '">' + u[t] + "</a>")
+                    }else{
+                        x.push('<a href="' + u[t] + '">' +  "</a>")
+                    }
+                }
+            }
+        }
+        if (z == d) {
+            x.push('<a href="' + r + '" class="pageMove tMuted" style="cursor:not-allow">&gt;</a>')
+        } else {
+            x.push('<a href="' + r + '" class="pageMove">&gt;</a>')
+        }
+        x.push("<span>&nbsp;</span>");
+        m.html(x.join(""));
+        m.off("click", "a").on("click", "a", function (f) {
+            var c = $(this);
+            if (c.hasClass("active") || c.hasClass("tMuted")) {
+                return false
+            }
+            c.html('<img style="width:100%;vertical-align:middle;" src="/public/img/loader.gif" />');
+            if (typeof a == "function") {
+                a(c.attr("href"))
+            }
+            return false
+        })
     };
     Carousel.prototype.updatePageFooter = function () {
         var that = this;
-        z.setPageFooter(this.$pageFooter, this.total, this.curIndex+1 ,function(idx){
+        this.setPageFooter(this.$pageFooter, this.total, this.curIndex+1 ,function(idx){
             that.nextIndex = idx-1;
-            console.log(idx)
             that.play();
         },this.num_display_entries, this.items_per_page);
 
@@ -143,9 +268,12 @@
         if (checkAbsolute($this.css("position")) == false) {
             $this.css("position", "relative");
         }
-        $this.css({
-            height: this.height
-        });
+        if(this.adjustWrapHeight){
+            $this.css({
+                height: this.height
+            });
+        }
+
     };
 
     Carousel.prototype.fixSlideItem = function () {
@@ -172,10 +300,10 @@
     Carousel.prototype.fixLeftSlideItem = function () {
 
         var $this = this.$item;
-
+        var curOffset = this.curIndex * (this.paddingLeft + this.itemWidth);
         for (var i = 0; i < $this.length; i += this.itemNum) {
             for (var j = 0; j < this.itemNum; j++) {
-                $this.eq(i + j).css({left: ( this.paddingLeft + this.itemWidth ) * j + this.paddingLeft + this.width * i})
+                $this.eq(i + j).stop(true,true).css({left: ( this.paddingLeft + this.itemWidth ) * j + this.paddingLeft + this.width * i-curOffset})
             }
         }
         $this.css({top: this.paddingTop})
@@ -362,14 +490,17 @@
                 }
                 var animateLeft= nextLeft-curLeft  ;
                 var that = this;
-                this.$item.each(function(){
+                this.$item.not(this.$item.eq(this.curIndex)).each(function(){
                     var $this = $(this);
-                    var left =$this.data("animateTargetLeft")
-                    if(typeof left == "undefined"){
-                        left = $this.css("left").toFloat();
-                    }
-                    $this.stop(true,true).css({left:left+"px"}).animate({ left: (left- animateLeft)+"px" }, that.time).data("animateTargetLeft",(left- animateLeft) );
+                    startAniamteBySilde($this,animateLeft,that)
                 });
+                //去掉间隙
+                startAniamteBySilde(this.$item.eq(this.curIndex),animateLeft,that,function () {
+                    if(typeof that.changeCallBack == "function"){
+                        that.changeCallBack(that.curIndex);
+                    }
+                })
+
             }
 
         }
@@ -382,13 +513,20 @@
 
     };
 
+    function startAniamteBySilde($this,animateLeft,that,callback) {
+        var left =$this.data("animateTargetLeft")
+        if(typeof left == "undefined"){
+            left = $this.css("left").toFloat();
+        }
+        $this.stop(true,true).css({left:(left)+"px"}).animate({ left: (left- animateLeft)+"px" }, that.time,callback).data("animateTargetLeft",(left- animateLeft) );
+    }
 
     Carousel.prototype.out = function (idx) {
 
         if( this.switchType == "slide" ){
 
             if(this.dir == "left"){
-                this.$item.eq( idx ).animate({left: (this.left - this.width)+"px"}, this.time, callBack);
+                this.$item.eq( idx ).animate({left: (this.left - this.width)+"px"}, this.time, this.callBack);
             }
 
         }
@@ -442,11 +580,11 @@
 
         this.stop();
 
-        this.nextIndex = getNext(this.curIndex, this.total, this.loop);
-
         var that = this;
 
         this.timer = setTimeout(function () {
+
+            that.nextIndex = getNext(that.curIndex, that.total, that.loop);
 
             that.play();
 
@@ -517,12 +655,13 @@
                 } else {
                     opts.$wrap = $this;
                 }
-
+                /*如果wrap为ul表示不符合caousel结构*/
                 if (/^UL|OL|DL$/.test(opts.$wrap[0].nodeName)) {
                     opts.$wrap = $("<div class='cs-wrap'></div>");
                     $this.wrap(opts.$wrap);
                 }
 
+                /*动态添加子项*/
                 if (opts.data && opts.template) {
 
                     var templ;
@@ -575,7 +714,12 @@
                     opts.$wrap.append(opts.$next);
                 }
 
-
+                if(opts.width||$this.width()==0){
+                    opts.adjustWrapWidth = true;
+                }
+                if(opts.height||$this.height()==0){
+                    opts.adjustWrapHeight = true;
+                }
                 opts.width = opts.width || $this.width() || 960;//外容器宽
 
                 opts.height = opts.height || $this.height() || 300;//外容器高
@@ -603,8 +747,24 @@
                     return false;
 
                 });
+                var perWrapContainWidth,perWrapContainHeight;
+                $(window).on("resize",function () {
+                    var wrapContainWidth = opts.$wrap.width();
+                    var wrapContainHeight = opts.$wrap.height();
+                    if(wrapContainWidth!=perWrapContainWidth || wrapContainHeight!=perWrapContainHeight){
+                        carousel.width = wrapContainWidth;
+                        carousel.height =  wrapContainHeight;
+                        carousel.stop();
+                        carousel.fixPosition();
+                        if (carousel.autoPlay) {
+                            carousel.start();
+                        }
+                        perWrapContainWidth = wrapContainWidth;
+                        perWrapContainHeight = wrapContainHeight;
+                    }
 
-                return opts.$wrap.data("carousel", carousel);
+                })
+                $this.data("carousel",carousel);
             })
         }
     })

@@ -36,6 +36,12 @@
     };
 
     /*
+     * 转换为float
+     *
+     * */
+    String.prototype.toFloat = function(a){return parseFloat(this,10)||a||0}
+
+    /*
      * 设置rem的根大小
      *
      * */
@@ -298,34 +304,7 @@
                 loadimg($curpage, imgArr[i].$target, imgArr[i].src, deepObj, len, initBg);
             }
         }
-        var perSildeIndex;
-        var slideFlag;
-
-        var vSwiper = new Swiper('.swiper-container', {
-            speed: 1000,
-            parallax: true,
-            // initialSlide: 3,
-            // loop:true,
-            // simulateTouch:false,
-            // nextButton: '.arrow-right',
-            // prevButton: '.arrow-left',
-            paginationClickable: true,
-            pagination: ".swiper-pagination",
-            autoplay:6000,
-            onTransitionEnd: function () {
-                if (vSwiper) {
-                    if(vSwiper.activeIndex!=perSildeIndex){
-                        slideFlag=false;
-                        perSildeIndex = perSildeIndex||$(".page.current").index()||0;
-                        $(".page").data("lockAutoNext",true)
-                        goNextPage($(".page").eq(perSildeIndex), $(".page").eq(vSwiper.activeIndex));
-                        perSildeIndex = vSwiper.activeIndex;
-                    }
-
-                }
-            }
-        })
-
+        /*加载完第一页之后，加载其他页的底图*/
         function initAllbg() {
             $(".page").each(function (idx) {
                 var src = $(this).data("bg")
@@ -335,37 +314,38 @@
             })
         }
 
-        $(".arrow-left").click(function () {
-            if(slideFlag){
-                return false;
+        var perSildeIndex;
+        var carsouselTimer
+        /*轮播效果*/
+       $(".swiper-container").carousel({
+            prev: ".arrow-right",
+            next: ".arrow-left",
+            item: ".swiper-slide",
+            itemWrap: ".swiper-wrapper",
+            time: 200,
+            fixArrow:false,
+            loop: true,
+            autoPlay: true,
+            autoPlayTime: 7000,
+            dir: "left",
+            changeCallBack: function (activeIndex) {
+                clearTimeout(carsouselTimer);
+                carsouselTimer = setTimeout(function () {
+                    perSildeIndex = perSildeIndex||$(".page.current").index()||0;
+                    $(".page").data("lockAutoNext",true)
+                    goNextPage($(".page").eq(perSildeIndex), $(".page").eq(activeIndex));
+                    perSildeIndex = activeIndex;
+                },200);
             }
-            slideFlag = true;
-            if(vSwiper.activeIndex<=0){
-                vSwiper.slideTo(4);
-            }else{
-                vSwiper.slideTo(vSwiper.activeIndex-1);
-            }
-            return false;
-        })
-
-        $(".arrow-right").click(function () {
-            if(slideFlag){
-                return false;
-            }
-            slideFlag = true;
-            if(vSwiper.activeIndex>=4){
-                vSwiper.slideTo(0);
-            }else{
-                vSwiper.slideTo(vSwiper.activeIndex+1);
-            }
-        })
-        // console.log(vSwiper)
+        });
+       var vSwiper = $(".swiper-container").data("carousel")
         $(".stopAutoPlay").hover(function(){
-            vSwiper.stopAutoplay();
+            vSwiper.autoPlay = false
+            vSwiper.stop();
         },function(){
-            vSwiper.startAutoplay();
+            vSwiper.autoPlay = true
+            vSwiper.start();
         })
-        // initPageEvent()
         initpage(initAllbg);
 
     })
