@@ -38,9 +38,40 @@ var css3Transition = css3TransitionMap[CSS3FLAG] || "transition"
 
 /**
  *
+ * addJqueryAnimate动画
+ *
+ * */
+function addJqueryAnimate($target, aniOpt, callBack) {
+    var dtd = $.Deferred(); // 新建一个deferred对象
+    var def = {
+        duration: ".2s",
+        delay: ".1s",
+    }
+    if (typeof aniOpt == "function") {
+        callBack = aniOpt;
+        aniOpt = null;
+    }else {
+        def= $.extend({}, def, aniOpt);
+	}
+
+    //需要等待Deferred完全处理，另开线程
+    if (typeof  callBack == "function") {
+        callBack($target);
+    } else {
+        $target.addClass("jqueryAnimate").stop(true,true).delay(parseFloat(def.delay,10)*1000).animate({opacity:1},parseFloat(def.duration,10)*1000,function () {
+            dtd.resolve(); // 改变deferred对象的执行状态
+        })
+    }
+    return dtd.promise();
+}
+
+
+/**
+ *
  * css3动画的promise
  *
  * */
+
 var g_cont = 0;//用来统计多个css3动画同时开始
 function addCSS3Animate($target, aniOpt, callBack) {
 	var dtd = $.Deferred(); // 新建一个deferred对象

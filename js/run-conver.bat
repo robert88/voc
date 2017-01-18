@@ -1,0 +1,12 @@
+rename  bz.js bz
+rename  canvasAnimate.js canvasAnimate
+rename  countUp.js countUp
+rename  css3Animate.js css3Animate
+rename  getsize.js getsize
+rename  jp.js jp
+rename  jquery-1.11.3.min.js jquery-1.11.3.min
+rename  jquery.carousel.v1.0.1.js jquery.carousel.v1.0.1
+rename  main.js main
+rename  pt.js pt
+rename  wt.js wt
+rename  yq.js yq

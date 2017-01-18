@@ -7,7 +7,7 @@ $(function () {
 
       var $this = $(this);
         var canvasAnimate = new CanvasAnimate({c: $(".yq-canvas")[0]});
-        $this.data("animate",canvasAnimate);
+        $(".yq-canvas").data("animate",canvasAnimate);
         //1、画外圈和内圈
         canvasAnimate.pushAnimate(new Object2d({
             data: [{"x": 30, "y": 30, src: "./images/yq/yq_quan1.png", start: 0, end: 360},

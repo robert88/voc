@@ -163,16 +163,17 @@
             $(".animate-move-v-2").removeClass("animate-move-v-2")
             $(".animate-move-h").removeClass("animate-move-h")
             $(".animate-opacity").removeClass("animate-move-h")
-
+            $(".jqueryAnimate").stop(true,true).css("opacity",0).removeClass("jqueryAnimate")
             $(".page").data("lock", true).data("lockAutoNext",false).removeClass("current");
             clearTimeout( $(".page").data("timer2"));
             clearTimeout( $(".page").data("timer"));
             var canvas =  $(".page").find("canvas").each(function () {
                 this.width = this.width;
-                var canvasAnimate = $(this).parents(".page").data("animate");
+                var canvasAnimate = $(this).data("animate");
                 if(canvasAnimate){
                     canvasAnimate.lock = true;
                     cancelAnimationFrame(canvasAnimate.timer);
+                    $(this).data("animate",null)
                 }
             });
         }
@@ -222,20 +223,53 @@
         function initpage(initBg) {
             var $curpage = $(".page.current").length==0? $(".page").eq(0):$(".page.current");
             var index = $curpage.index();
-            // if(index==0){
-            //     $(".arrow-left").css("cursor","not-allowed")
-            // }else{
-            //     $(".arrow-left").css("cursor","pointer")
-            // }
-            // if(index==($(".page").length-1)){
-            //     $(".arrow-right").css("cursor","not-allowed")
-            // }else{
-            //     $(".arrow-right").css("cursor","pointer")
-            // }
 
             animateCountUp($curpage.find(".animateCountUp"))
-                $(".animate-rotate-one").removeClass("animate-rotate-one")
-            addCSS3Animate($curpage.find(".quan").addClass("animate-rotate-one"))
+
+            if($curpage.find(".quan-canvas").length){
+                var canvasAnimate = new CanvasAnimate({c: $curpage.find(".quan-canvas")[0]});
+                var quan = $curpage.find(".quanWrap").length;
+                var data = [];
+                for(var i=0;i<quan;i++){
+                    data.push({"x": 0+i*150, "y": 0, src: "./images/quan.png", start: 0, end: 360})
+                }
+                $curpage.find(".quan-canvas").data("animate",canvasAnimate)
+                canvasAnimate.pushAnimate(new Object2d({
+                    data:data,
+                    render: function (canvasObj) {
+                        var count = 0;
+                        for (var i = 0; i < this.copyData.length; i++) {
+                            var copyData = this.copyData[i];
+
+                            if (copyData.image.status == "ready") {
+                                canvasObj.ctx.save();
+
+                                copyData.rotateAnimate = copyData.rotateAnimate || new AnimateCounter({
+                                        start: copyData.start,
+                                        end: copyData.end,
+                                        loop: false,
+                                        animateType: "linear",
+                                        duration: 1000
+                                    });
+                                canvasObj.rotate(copyData.rotateAnimate, {
+                                    x: copyData.x,
+                                    y: copyData.y,
+                                    width: copyData.image.width,
+                                    height: copyData.image.height
+                                });
+
+                                canvasObj.drawImage(copyData);
+                                canvasObj.ctx.restore()
+                            }
+                        }
+                        if (count == this.copyData.length) {
+                            this.promise.resolve();
+                        }
+                        return true;
+                    }
+                })).done(function () {})
+            }
+
             if (!$curpage.data("ready")) {
                 loadpage($curpage, initBg);
             } else {
@@ -247,7 +281,10 @@
         function loadoneimg($target, src, callback) {
             var img = new Image;
             img.onload = function () {
-                $target.css("background-image", "url(" + src + ")")
+                $target.css({
+                    backgroundImage:"url(" + src + ")",
+                    backgroundRepeat:"no-repeat"
+                })
                 if (typeof  callback == "function") {
                     callback();
                 }
@@ -309,7 +346,10 @@
             $(".page").each(function (idx) {
                 var src = $(this).data("bg")
                 if (idx > 0) {
-                    $(this).css("background-image", "url(" + src + ")")
+                    $(this).css({
+                        backgroundImage:"url(" + src + ")",
+                        backgroundRepeat:"no-repeat"
+                    })
                 }
             })
         }
@@ -325,6 +365,7 @@
             time: 200,
             fixArrow:false,
             loop: true,
+           nextLoop:true,
             autoPlay: true,
             autoPlayTime: 7000,
             dir: "left",

@@ -5,11 +5,11 @@ $(function () {
 
          //1、画地图
         var $this = $(this);
-        addCSS3Animate($(".bz-ditu")).done(function () {
+        addJqueryAnimate($(".bz-ditu")).done(function () {
 
             //2、画随机点
             var canvasAnimate = new CanvasAnimate({c: $(".bz-canvas")[0]});
-            $this.data("animate",canvasAnimate);
+            $(".bz-canvas").data("animate",canvasAnimate);
             canvasAnimate.pushAnimate(new Object2d({
                 data: [{"x":369,"y":32,color:"#40d3e5"},{"x":381,"y":21,color:"#40d3e5"},{"x":454,"y":52,color:"#40d3e5"},{"x":517,"y":53},{"x":530,"y":89},{"x":512,"y":113},{"x":559,"y":123},{"x":618,"y":158},{"x":521,"y":166},{"x":584,"y":196},{"x":636,"y":206},{"x":525,"y":253},{"x":481,"y":298},{"x":500,"y":361},{"x":597,"y":372},{"x":608,"y":474},{"x":715,"y":534},{"x":648,"y":583},{"x":518,"y":538},{"x":527,"y":517}],
                 render: function (canvasObj) {
@@ -112,19 +112,19 @@ $(function () {
 
                 //5、扫描出来的点
                 var dur = {duration: ".3s"}
-                addCSS3Animate($(".bz-dian4"),{delay: ".1s"}).done(function () {
+                addJqueryAnimate($(".bz-dian4"),{delay: ".1s"}).done(function () {
                     $(".bz-dian4").addClass("animate-shake")
-                    addCSS3Animate($(".bz-dian5"),{delay: ".8s"}).done(function () {
+                    addJqueryAnimate($(".bz-dian5"),{delay: ".2s"}).done(function () {
                         $(".bz-dian5").addClass("animate-shake")
-                        addCSS3Animate($(".bz-dian6"),{delay: ".6s"}).done(function () {
+                        addJqueryAnimate($(".bz-dian6"),{delay: ".8s"}).done(function () {
                             $(".bz-dian6").addClass("animate-shake")
-                            addCSS3Animate($(".bz-dian7"),{delay: ".6s"}).done(function () {
+                            addJqueryAnimate($(".bz-dian7"),{delay: ".6s"}).done(function () {
                                 $(".bz-dian7").addClass("animate-shake")
-                                addCSS3Animate($(".bz-dian1"),{delay: ".3s"}).done(function () {
+                                addJqueryAnimate($(".bz-dian1"),{delay: ".4s"}).done(function () {
                                     $(".bz-dian1").addClass("animate-shake")
-                                    addCSS3Animate($(".bz-dian2"),{delay: ".3s"}).done(function () {
+                                    addJqueryAnimate($(".bz-dian2"),{delay: ".3s"}).done(function () {
                                         $(".bz-dian2").addClass("animate-shake")
-                                        addCSS3Animate($(".bz-dian3"),{delay: ".3s"}).done(function () {
+                                        addJqueryAnimate($(".bz-dian3"),{delay: ".3s"}).done(function () {
                                             $(".bz-dian3").addClass("animate-shake")
                                         })
                                     })

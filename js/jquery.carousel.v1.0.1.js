@@ -18,10 +18,12 @@
 
         autoPlay: true,
         loop: true,
+        nextLoop:false,//直接下一个页面，没有首尾之分
         time: "swing",
         lazyLoad: true,
         switchType: "slide",
         autoPlayTime: 5000,
+
         dir: "left",
         fixArrow:true,
         changeCallBack: null
@@ -205,7 +207,7 @@
             if (c.hasClass("active") || c.hasClass("tMuted")) {
                 return false
             }
-            c.html('<img style="width:100%;vertical-align:middle;" src="/public/img/loader.gif" />');
+            // c.html('<img style="width:100%;vertical-align:middle;" src="/public/img/loader.gif" />');
             if (typeof a == "function") {
                 a(c.attr("href"))
             }
@@ -301,11 +303,14 @@
 
         var $this = this.$item;
         var curOffset = this.curIndex * (this.paddingLeft + this.itemWidth);
+
         for (var i = 0; i < $this.length; i += this.itemNum) {
             for (var j = 0; j < this.itemNum; j++) {
-                $this.eq(i + j).stop(true,true).css({left: ( this.paddingLeft + this.itemWidth ) * j + this.paddingLeft + this.width * i-curOffset})
+                var left = ( this.paddingLeft + this.itemWidth ) * j + this.paddingLeft + this.width * i-curOffset;
+                $this.eq(i + j).stop(true,true).data("animateTargetLeft",left).css({left:left })
             }
         }
+
         $this.css({top: this.paddingTop})
     };
 
@@ -437,6 +442,12 @@
         })
     }
 
+    Carousel.prototype.setPosition=function(idx,flag){
+        for (var j = 0; j < this.itemNum; j++) {
+            var left = ( this.paddingLeft + this.itemWidth ) * j + this.paddingLeft + this.width *flag;
+            this.$item.eq(idx + j).stop(true,true).css({left: left}).data("animateTargetLeft",left)
+        }
+    }
 
     Carousel.prototype.in = function (idx) {
 
@@ -480,16 +491,27 @@
 
             if(this.dir == "left"){
 
-                var nextLeft = this.$item.eq(this.nextIndex).data("animateTargetLeft");
-                var curLeft = this.$item.eq(this.curIndex).data("animateTargetLeft");
+                var animateLeft
+                var that = this;
+                var nextLeft,curLeft;
+               if(this.nextLoop){
+                   this.fixLeftSlideItem()
+                   if(this.nextIndex==0&&(this.curIndex==this.total-1)){
+                       this.setPosition(this.nextIndex,1);
+                   }else if(this.curIndex==0&&(this.nextIndex==this.total-1)){
+                       this.setPosition(this.nextIndex,-1);
+                   }else{
+                        nextLeft = this.$item.eq(this.nextIndex).data("animateTargetLeft");
+                        curLeft = this.$item.eq(this.curIndex).data("animateTargetLeft");
+                   }
+               }
                 if(typeof nextLeft == "undefined"){
                     nextLeft = this.$item.eq(this.nextIndex).css("left").toFloat()
                 }
                 if(typeof curLeft == "undefined"){
                     curLeft = this.$item.eq(this.curIndex).css("left").toFloat()
                 }
-                var animateLeft= nextLeft-curLeft  ;
-                var that = this;
+                 animateLeft= nextLeft-curLeft  ;
                 this.$item.not(this.$item.eq(this.curIndex)).each(function(){
                     var $this = $(this);
                     startAniamteBySilde($this,animateLeft,that)
@@ -500,6 +522,9 @@
                         that.changeCallBack(that.curIndex);
                     }
                 })
+
+
+
 
             }
 

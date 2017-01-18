@@ -1,3 +1,4 @@
+
 window.requestAnimationFrame = (function () {
 
 	return window.requestAnimationFrame ||    //IE10以及以上版本，以及最新谷歌，火狐版本
@@ -33,6 +34,7 @@ window.cancelAnimationFrame = (function () {
  *
  *
  * */
+
 function CanvasAnimate(opts) {
 	this.opts = $.extend(true, {}, opts);
 	this.c = opts.c;
@@ -213,11 +215,13 @@ AnimateCounter.prototype.animateFunc = {
  *
  *
  * */
-CanvasAnimate.prototype.drawGroupDian = function (dian, animateCounter) {
+CanvasAnimate.prototype.drawGroupDian = function (dian, animateCounter,r) {
 
 	//根据粒子对象
+	if(animateCounter){
+        r = animateCounter.getCount();
+	}
 
-	var r = animateCounter.getCount();
 	//开始一个新的绘制路径
 	var ctx = this.ctx;
 	ctx.beginPath();

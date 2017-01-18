@@ -5,11 +5,11 @@ $(function () {
         var $this = $(this);
 
         //1、画地图
-        addCSS3Animate($(".pt-ditu")).done(function () {
+        addJqueryAnimate($(".pt-ditu")).done(function () {
             //2、画圈
             var canvasAnimate = new CanvasAnimate({c: $(".pt-canvas")[0]});
 
-            $this.data("animate",canvasAnimate);
+            $(".pt-canvas").data("animate", canvasAnimate);
             canvasAnimate.pushAnimate(new Object2d({
                 data: [{"x": 90, "y": 0, src: "./images/pt/pt_quan1.png", start: 0, end: 360},
                     {"x": 90, "y": 0, src: "./images/pt/pt_quan2.png", start: 360, end: 0},
@@ -59,44 +59,54 @@ $(function () {
                 }
             })).done(function () {
                 //3、画1点
-                addCSS3Animate($(".pt-dian1")).done(function () {
+                canvasAnimate.pushAnimate(new Object2d({
+                    data: [{"x": 498, "y": 164.22665405273438}],
+                    render: function (canvasObj) {
+                        var drawData = this.copyData;
+                        var len = drawData.length;
+                        //100ms一次来画点
+                        for (var i = 0; i < len; i++) {
+                            canvasObj.ctx.fillStyle = "#ec7a41";
+                            canvasObj.drawGroupDian(drawData[i],null, 10);
+                            canvasObj.ctx.fillStyle = "rgba(237,122,65,.5)";
+                            drawData[i].flashTimer = drawData[i].flashTimer || new AnimateCounter({
+                                    start: 10,
+                                    end: 18,
+                                    rockback: true,
+                                    duration: 1000
+                                })
+                            canvasObj.drawGroupDian(drawData[i], drawData[i].flashTimer)
+                        }
+                        return true;
+                    }
+                }))
+                //4、画4线
+                addCSS3Animate($(".pt-line1,.pt-line2,.pt-line3,.pt-line4")).done(function () {
                     canvasAnimate.pushAnimate(new Object2d({
-                        data: [{"x":498,"y":164.22665405273438}],
+                        data: [{"x": 266.4, "y": 128, start: 5, end: 13},
+                            {"x": 173, "y": 220, start: 7, end: 15},
+                            {"x": 348, "y": 214, start: 3, end: 11},
+                            {"x": 380, "y": 336, start: 6, end: 14}],
                         render: function (canvasObj) {
                             var drawData = this.copyData;
                             var len = drawData.length;
                             //100ms一次来画点
-                            canvasObj.ctx.fillStyle = "rgba(237,122,65,.5)";
+
                             for (var i = 0; i < len; i++) {
-                                drawData[i].flashTimer =  drawData[i].flashTimer||new AnimateCounter({start:10,end:18,rockback: true,duration:1000})
-                                canvasObj.drawGroupDian(drawData[i], drawData[i].flashTimer )
+                                canvasObj.ctx.fillStyle = "#ffcc00";
+                                canvasObj.drawGroupDian(drawData[i], null,drawData[i].start);
+                                canvasObj.ctx.fillStyle = "rgba(226,188,29,.5)";
+                                drawData[i].flashTimer = drawData[i].flashTimer || new AnimateCounter({
+                                        start: drawData[i].start,
+                                        end: drawData[i].end,
+                                        rockback: true,
+                                        duration: 1000
+                                    })
+                                canvasObj.drawGroupDian(drawData[i], drawData[i].flashTimer)
                             }
                             return true;
                         }
                     }))
-                    //4、画4线
-                    addCSS3Animate($(".pt-line1,.pt-line2,.pt-line3,.pt-line4")).done(function () {
-                        //4、画4点
-                        addCSS3Animate($(".pt-dian2,.pt-dian3,.pt-dian4,.pt-dian5")).done(function () {
-                            canvasAnimate.pushAnimate(new Object2d({
-                                data: [{"x":266.4,"y":128,start:5,end:13},
-                                    {"x":173,"y":220,start:7,end:15},
-                                    {"x":348,"y":214,start:3,end:11},
-                                    {"x":380,"y":336,start:6,end:14}],
-                                render: function (canvasObj) {
-                                    var drawData = this.copyData;
-                                    var len = drawData.length;
-                                    //100ms一次来画点
-                                    canvasObj.ctx.fillStyle = "rgba(226,188,29,.5)";
-                                    for (var i = 0; i < len; i++) {
-                                        drawData[i].flashTimer =  drawData[i].flashTimer||new AnimateCounter({start:drawData[i].start,end:drawData[i].end,rockback: true,duration:1000})
-                                        canvasObj.drawGroupDian(drawData[i], drawData[i].flashTimer )
-                                    }
-                                    return true;
-                                }
-                            }))
-                        })
-                    })
                 })
             })
 

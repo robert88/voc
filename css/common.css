@@ -36,8 +36,16 @@ header {
 .logo>img{
 	margin-left: 1.4rem;
 }
-
+.quan-canvas{
+	/*border: 1px solid red;*/
+	position: absolute;
+	top: -3px;
+	left: 15px;
+}
 /*浮动布局 宽度*/
+.toji{
+	position: relative;
+}
 .col:after,.page:after,.toji:after {
 	content: " ";
 	display: block;
@@ -178,7 +186,7 @@ footer {
 	height: 100%;
 	left:0;top:0;
 }
-.page .toji>li{
+.page .toji li{
 	float: left;
 	text-align: center;
 	width: 150px;
